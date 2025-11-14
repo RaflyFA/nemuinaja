@@ -1,7 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import { useAuth } from "@/lib/auth-context"
+// Perbaikan: Mencoba lagi path relatif
+import { useAuth } from "../lib/auth-context" 
+import Link from "next/link";
 
 interface DrawerMenuProps {
   onRequestClose: () => void
@@ -9,7 +11,7 @@ interface DrawerMenuProps {
 }
 
 export default function DrawerMenu({ onRequestClose, onCloseComplete }: DrawerMenuProps) {
-  const { isAuthenticated, user, login, logout } = useAuth()
+  const { isAuthenticated, user, login, logout } = useAuth() // login (dari useAuth) tidak kita pakai lagi di sini
   const [isContentClosing, setIsContentClosing] = useState(false)
   const [isClosing, setIsClosing] = useState(false)
 
@@ -29,10 +31,13 @@ export default function DrawerMenu({ onRequestClose, onCloseComplete }: DrawerMe
     handleClose()
   }
 
-  const handleLogin = () => {
-    login()
-    handleClose()
-  }
+  // Kita tidak lagi memerlukan 'handleLogin' karena navigasi
+  // akan ditangani oleh <Link>
+  //
+  // const handleLogin = () => {
+  //  login()
+  //  handleClose()
+  // }
 
   const menuItems = [
     "Profil",
@@ -56,7 +61,7 @@ export default function DrawerMenu({ onRequestClose, onCloseComplete }: DrawerMe
 
         <div className={`drawer-inner ${isContentClosing ? "content-closing" : ""}`}>
           <div className="drawer-header">
-            <div className="user-icon">👤</div>
+            <div className="user-icon">👤</div> {/* Ganti dengan <Image> jika perlu */}
             <div className="user-info">
               {isAuthenticated ? (
                 <>
@@ -68,13 +73,27 @@ export default function DrawerMenu({ onRequestClose, onCloseComplete }: DrawerMe
               ) : (
                 <>
                   <p className="user-greeting">Hai, Kamu</p>
+                  
+                  {/* === BLOK YANG DIUBAH === */}
                   <div className="user-links">
-                    <button className="user-link" onClick={handleLogin}>
+                    <Link
+                      href="/login"
+                      className="user-link"
+                      onClick={handleClose}
+                    >
                       Masuk
-                    </button>
+                    </Link> { /* Perbaikan: Tag penutup yang benar */ }
                     <span className="link-separator">›</span>
-                    <button className="user-link">Daftar</button>
+                    <Link
+                      href="/register" // Kita akan buat halaman ini selanjutnya
+                      className="user-link"
+                      onClick={handleClose}
+                    >
+                      Daftar
+                    </Link>
                   </div>
+                  {/* === AKHIR BLOK YANG DIUBAH === */}
+
                 </>
               )}
             </div>
@@ -85,6 +104,7 @@ export default function DrawerMenu({ onRequestClose, onCloseComplete }: DrawerMe
           <ul className="menu-list">
             {menuItems.map((item) => (
               <li key={item}>
+                {/* Anda juga bisa mengubah ini menjadi <Link> nanti */}
                 <a href="#" onClick={(e) => e.preventDefault()}>
                   {item}
                 </a>
