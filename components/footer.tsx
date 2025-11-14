@@ -7,10 +7,10 @@ export default function Footer() {
         <p className="footer-title">Follow nemuinaja</p>
         <div className="social-icons">
           <a href="#" aria-label="Instagram">
-            <img src="/instagram.webp" alt="Instagram" style={{ width: 28, height: 28 }} />
+            <img src="/instagram.webp" alt="Instagram" style={{ width: 20, height: 20 }} />
           </a>
           <a href="#" aria-label="Facebook">
-            <img src="/facebook.webp" alt="Facebook" style={{ width: 28, height: 28 }} />
+            <img src="/facebook.webp" alt="Facebook" style={{ width: 20, height: 20 }} />
           </a>
           <a href="#" aria-label="Twitter">
             𝕏
