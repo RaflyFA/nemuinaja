@@ -1433,10 +1433,30 @@ body.drawer-open .appbar {
 }
 
 .collection-bookmark {
-  background: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
   border: none;
-  font-size: 20px;
+  background: #f0f0f3;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.12);
+}
+
+.collection-bookmark img {
+  width: 18px;
+  height: 18px;
+}
+
+.collection-bookmark.saved {
+  background: #1d1d21;
+}
+
+.collection-bookmark.saved img {
+  filter: invert(1);
 }
 
 /* ===== CTA DARK ===== */

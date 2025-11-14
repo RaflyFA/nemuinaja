@@ -17,7 +17,6 @@ const STORAGE_KEY = "nemuinaja_favorites_likes"
 export default function FavoritSayaPage() {
   const router = useRouter()
   const [likedIds, setLikedIds] = useState<number[]>([])
-
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY)
@@ -26,7 +25,6 @@ export default function FavoritSayaPage() {
       setLikedIds([])
     }
   }, [])
-
   const toggleLike = (id: number) => {
     setLikedIds((prev) => {
       const exists = prev.includes(id)
@@ -34,12 +32,10 @@ export default function FavoritSayaPage() {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
       } catch (e) {
-        // ignore
       }
       return next
     })
   }
-
   return (
     <>
       <PageLayout containerClassName="favorites-container" mainClassName="favorites-page">
@@ -53,12 +49,10 @@ export default function FavoritSayaPage() {
           }}>Favorit</span> saya
           </h1>
         </header>
-
-        {/* back button moved below the header as requested */}
         <div className="favorites-back-row">
           <button className="favorites-back" onClick={() => router.back()} aria-label="Kembali">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <svg width="50" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M15 18L9 12L15 6" stroke="#FAFAFA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
         </div>
