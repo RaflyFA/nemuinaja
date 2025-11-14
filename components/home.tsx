@@ -111,8 +111,9 @@ export default function Home() {
         <Categories />
         <CtaDark />
         <Faq />
-        <Footer />
       </main>
+
+      <Footer />
     </div>
   )
 }

@@ -1,6 +1,8 @@
 "use client"
 
+import type React from "react"
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { useAuth } from "@/lib/auth-context"
 
 interface DrawerMenuProps {
@@ -12,6 +14,7 @@ export default function DrawerMenu({ onRequestClose, onCloseComplete }: DrawerMe
   const { isAuthenticated, user, login, logout } = useAuth()
   const [isContentClosing, setIsContentClosing] = useState(false)
   const [isClosing, setIsClosing] = useState(false)
+  const router = useRouter()
 
   const handleClose = () => {
     // tell parent to hide AppBar immediately (request)
@@ -35,15 +38,23 @@ export default function DrawerMenu({ onRequestClose, onCloseComplete }: DrawerMe
   }
 
   const menuItems = [
-    "Profil",
-    "Beranda",
-    "Direktori",
-    "Ajukan UMKM",
-    "Favorit Saya",
-    "Koleksi Saya",
-    "Tentang Kami",
-    "Bantuan",
+    { label: "Profil" },
+    { label: "Beranda", href: "/" },
+    { label: "Direktori", href: "/direktori" },
+    { label: "Ajukan UMKM" },
+    { label: "Favorit Saya" },
+    { label: "Koleksi Saya" },
+    { label: "Tentang Kami" },
+    { label: "Bantuan" },
   ]
+
+  const handleMenuItemClick = (item: (typeof menuItems)[number]) => (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault()
+    if (item.href) {
+      router.push(item.href)
+      handleClose()
+    }
+  }
 
   return (
     <>
@@ -84,9 +95,9 @@ export default function DrawerMenu({ onRequestClose, onCloseComplete }: DrawerMe
 
           <ul className="menu-list">
             {menuItems.map((item) => (
-              <li key={item}>
-                <a href="#" onClick={(e) => e.preventDefault()}>
-                  {item}
+              <li key={item.label}>
+                <a href={item.href ?? "#"} onClick={handleMenuItemClick(item)}>
+                  {item.label}
                 </a>
               </li>
             ))}

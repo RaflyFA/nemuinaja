@@ -896,6 +896,311 @@ body.drawer-open .appbar {
   gap: 8px;
 }
 
+.categories-dots .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #cccccc;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.categories-dots .dot.active {
+  background-color: var(--ink);
+  width: 24px;
+  border-radius: 4px;
+}
+
+.categories-dots .dot:focus,
+.carousel-dots .dot:focus {
+  outline: 2px solid var(--accent);
+}
+
+/* ===== DIRECTORY ===== */
+.directory-container {
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+.directory-page {
+  padding: 92px 16px 80px;
+  max-width: 640px;
+  margin: 0 auto;
+  background-color: #ffffff;
+}
+
+.directory-section {
+  margin-bottom: 40px;
+}
+
+.directory-heading {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #1d1d25;
+}
+
+.directory-heading .muted {
+  color: #63cbbb;
+}
+
+.directory-hero-card {
+  height: 180px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #d9d9df, #efeff3);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  margin-bottom: 24px;
+}
+
+.directory-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding: 0 2px;
+}
+
+.directory-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 10px 10px 14px;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.directory-card-media {
+  height: 100px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #e9e9ec, #e0e0e6);
+  margin-bottom: 10px;
+}
+
+.directory-card-body {
+  position: relative;
+}
+
+.directory-card-body h3 {
+  margin: 8px 0 4px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #111217;
+}
+
+.directory-card-body p {
+  margin: 0;
+  font-size: 12px;
+  color: #5f5f65;
+}
+
+.directory-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  padding: 6px 8px;
+  border-radius: 10px;
+  background-color: #25a891;
+  color: white;
+  font-weight: 700;
+  position: absolute;
+  top: -10px;
+  right: 12px; /* move badge to right */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.directory-section-title h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #1d1d21;
+}
+
+.directory-section-title span {
+  color: #63cbbb;
+}
+
+.directory-special-track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 20px; /* space for scrollbar strip */
+  scroll-snap-type: x mandatory;
+  position: relative;
+}
+
+.directory-special-track::-webkit-scrollbar {
+  height: 4px;
+}
+
+.directory-special-track::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 999px;
+}
+
+.directory-feature-card {
+  min-width: 260px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  scroll-snap-align: center;
+}
+
+.directory-feature-card {
+  border-radius: 18px;
+  display: inline-block;
+}
+
+.directory-feature-media {
+  height: 150px;
+  background: linear-gradient(140deg, #e0e0e6, #d5d5dc);
+}
+
+.directory-feature-media {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.directory-feature-body {
+  padding: 12px 14px 16px;
+}
+
+.directory-feature-body {
+  position: relative;
+}
+
+.directory-feature-body .directory-rating {
+  position: absolute;
+  top: -8px;
+  right: 12px;
+  padding: 6px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.directory-feature-body h3 {
+  margin: 12px 0 4px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1d1d21;
+}
+
+.directory-feature-body p {
+  margin: 0;
+  color: #5f5f65;
+  font-size: 13px;
+}
+
+.directory-dots {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.directory-scrollbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.directory-scrollbar {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+/* Dots-only carousel indicator (matches pasted image 2) */
+.directory-scrollbar .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: transparent;
+  border: 2px solid #d8d8dc;
+  margin: 0 6px;
+  padding: 0;
+  transition: all 140ms ease;
+  display: inline-block;
+}
+
+.directory-scrollbar .dot.active {
+  background: #1d1d21;
+  border-color: transparent;
+  width: 8px;
+  height: 8px;
+}
+
+.directory-scrollbar .dot:focus {
+  outline: 2px solid rgba(0,0,0,0.08);
+}
+
+.directory-stack-card {
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.directory-stack-media {
+  height: 160px;
+  background: linear-gradient(180deg, #e0e0e6, #d1d1d9);
+}
+
+.directory-stack-body {
+  padding: 16px;
+}
+
+.directory-stack-body {
+  position: relative;
+}
+
+.directory-stack-body .directory-rating {
+  position: absolute;
+  top: -8px;
+  right: 12px;
+  padding: 6px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.directory-stack-body h3 {
+  margin: 12px 0 4px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1d1d21;
+}
+
+.directory-stack-body p {
+  margin: 0;
+  color: #5f5f65;
+}
+
+/* rating badge tweaks for visual parity */
+.directory-rating {
+  background-color: #25a891; /* slightly deeper teal */
+  padding: 6px 10px;
+  font-weight: 700;
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 768px) {
+  .directory-page {
+    max-width: 940px;
+  }
+
+  .directory-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+
+  .directory-feature-card {
+    min-width: 340px;
+  }
+}
+
 /* ===== CTA DARK ===== */
 .cta-dark {
   background-color: var(--dark-surface);
@@ -1000,12 +1305,18 @@ body.drawer-open .appbar {
   background-color: var(--dark-surface);
   color: white;
   padding: 24px 16px;
-  /* Align footer content to left instead of center */
-  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .footer-content {
-  margin-bottom: 16px;
+  max-width: 940px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
 }
 
 .footer-title {
