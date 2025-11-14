@@ -31,7 +31,12 @@ export default function DirektoriPageContent() {
     <PageLayout containerClassName="directory-container" mainClassName="directory-page">
       <section className="directory-section">
         <h1 className="directory-heading">
-          <span className="muted">Trending</span> minggu ini
+          <span className="muted" style={{
+            background: 'linear-gradient(90deg, #5AC4B5 0%, #303030 23%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
+          }}>Trending</span> minggu ini
         </h1>
         <div className="directory-hero-card" aria-hidden />
 
