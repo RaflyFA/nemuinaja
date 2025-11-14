@@ -1,12 +1,12 @@
 "use client"
 
-import Directory from "@/components/directory"
 import { AuthProvider } from "@/lib/auth-context"
+import DirektoriPageContent from "@/components/pages/direktori"
 
 export default function DirektoriPage() {
   return (
     <AuthProvider>
-      <Directory />
+      <DirektoriPageContent />
     </AuthProvider>
   )
 }

@@ -1,0 +1,5 @@
+export { default as BerandaPage } from "./beranda"
+export { default as DirektoriPageContent } from "./direktori"
+export { default as FavoritSayaPage } from "./favorit-saya"
+export { default as PageLayout } from "./page-layout"
+export * from "./routes"

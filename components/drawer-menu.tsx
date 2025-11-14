@@ -1,9 +1,11 @@
 "use client"
 
 import type React from "react"
+import type React from "react"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/lib/auth-context"
+import { APP_PAGES, type AppPageConfig } from "./pages/routes"
 
 interface DrawerMenuProps {
   onRequestClose: () => void
@@ -37,18 +39,7 @@ export default function DrawerMenu({ onRequestClose, onCloseComplete }: DrawerMe
     handleClose()
   }
 
-  const menuItems = [
-    { label: "Profil" },
-    { label: "Beranda", href: "/" },
-    { label: "Direktori", href: "/direktori" },
-    { label: "Ajukan UMKM" },
-    { label: "Favorit Saya" },
-    { label: "Koleksi Saya" },
-    { label: "Tentang Kami" },
-    { label: "Bantuan" },
-  ]
-
-  const handleMenuItemClick = (item: (typeof menuItems)[number]) => (event: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleMenuItemClick = (item: AppPageConfig) => (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault()
     if (item.href) {
       router.push(item.href)
@@ -94,11 +85,22 @@ export default function DrawerMenu({ onRequestClose, onCloseComplete }: DrawerMe
           <hr className="drawer-divider" />
 
           <ul className="menu-list">
-            {menuItems.map((item) => (
-              <li key={item.label}>
+            {APP_PAGES.map((item) => (
+              <li key={item.key}>
                 <a href={item.href ?? "#"} onClick={handleMenuItemClick(item)}>
                   {item.label}
                 </a>
+                {item.subPages?.length ? (
+                  <ul className="submenu-list">
+                    {item.subPages.map((sub) => (
+                      <li key={sub.key}>
+                        <a href={sub.href ?? "#"} onClick={handleMenuItemClick(sub)}>
+                          {sub.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
               </li>
             ))}
           </ul>
