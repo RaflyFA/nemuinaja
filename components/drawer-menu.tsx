@@ -1,61 +1,68 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-// Perbaikan: Mencoba lagi path relatif
-import { useAuth } from "../lib/auth-context" 
+import type React from "react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
+// === PATH DIPERBAIKI (1) ===
+// Path yang benar adalah naik satu level (../) lalu masuk ke 'lib'
+import { useAuth } from "../lib/auth-context";
+
+// === PATH DIPERBAIKI (2) ===
+// Path yang benar adalah di dalam folder 'components' (./) lalu masuk ke 'pages'
+import { APP_PAGES, type AppPageConfig } from "./pages/routes";
+
 interface DrawerMenuProps {
-  onRequestClose: () => void
-  onCloseComplete: () => void
+  onRequestClose: () => void;
+  onCloseComplete: () => void;
 }
 
-export default function DrawerMenu({ onRequestClose, onCloseComplete }: DrawerMenuProps) {
-  const { isAuthenticated, user, login, logout } = useAuth() // login (dari useAuth) tidak kita pakai lagi di sini
-  const [isContentClosing, setIsContentClosing] = useState(false)
-  const [isClosing, setIsClosing] = useState(false)
+export default function DrawerMenu({
+  onRequestClose,
+  onCloseComplete,
+}: DrawerMenuProps) {
+  const { isAuthenticated, user, logout } = useAuth();
+  const [isContentClosing, setIsContentClosing] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+  const router = useRouter(); // Diambil dari kode rekan setim
 
   const handleClose = () => {
-    // tell parent to hide AppBar immediately (request)
-    onRequestClose()
-    // start both inner-content fade and drawer slide together so the content
-    // remains visible while the drawer moves up (no early disappearance)
-    setIsContentClosing(true)
-    setIsClosing(true)
-    // wait for the full CSS animation duration (matching globals.css: 0.52s) before unmount
-    setTimeout(() => onCloseComplete(), 560)
-  }
+    onRequestClose();
+    setIsContentClosing(true);
+    setIsClosing(true);
+    setTimeout(() => onCloseComplete(), 560);
+  };
 
   const handleLogout = () => {
-    logout()
-    handleClose()
-  }
+    logout();
+    handleClose();
+  };
 
-  // Kita tidak lagi memerlukan 'handleLogin' karena navigasi
-  // akan ditangani oleh <Link>
-  //
-  // const handleLogin = () => {
-  //  login()
-  //  handleClose()
-  // }
-
-  const menuItems = [
-    "Profil",
-    "Beranda",
-    "Direktori",
-    "Ajukan UMKM",
-    "Favorit Saya",
-    "Koleksi Saya",
-    "Tentang Kami",
-    "Bantuan",
-  ]
+  // Diambil dari kode rekan setim
+  const handleMenuItemClick =
+    (item: AppPageConfig) => (event: React.MouseEvent<HTMLAnchorElement>) => {
+      event.preventDefault();
+      if (item.href) {
+        router.push(item.href);
+        handleClose();
+      }
+    };
 
   return (
     <>
       <div className="drawer-overlay" onClick={handleClose} role="presentation" />
 
-      <nav className={`drawer-menu ${isClosing ? "closing" : ""}`} role="navigation" aria-label="Main menu">
-        <button className="drawer-close" onClick={handleClose} aria-label="Close menu">
+      <nav
+        className={`drawer-menu ${isClosing ? "closing" : ""}`}
+        role="navigation"
+        aria-label="Main menu"
+      >
+        <button
+          className="drawer-close"
+          onClick={handleClose}
+          aria-label="Close menu"
+        >
           ✕
         </button>
 
@@ -73,8 +80,8 @@ export default function DrawerMenu({ onRequestClose, onCloseComplete }: DrawerMe
               ) : (
                 <>
                   <p className="user-greeting">Hai, Kamu</p>
-                  
-                  {/* === BLOK YANG DIUBAH === */}
+
+                  {/* === INI KODE ANDA (LINK LOGIN) YANG DIGABUNGKAN === */}
                   <div className="user-links">
                     <Link
                       href="/login"
@@ -82,7 +89,7 @@ export default function DrawerMenu({ onRequestClose, onCloseComplete }: DrawerMe
                       onClick={handleClose}
                     >
                       Masuk
-                    </Link> { /* Perbaikan: Tag penutup yang benar */ }
+                    </Link>
                     <span className="link-separator">›</span>
                     <Link
                       href="/register" // Kita akan buat halaman ini selanjutnya
@@ -92,8 +99,7 @@ export default function DrawerMenu({ onRequestClose, onCloseComplete }: DrawerMe
                       Daftar
                     </Link>
                   </div>
-                  {/* === AKHIR BLOK YANG DIUBAH === */}
-
+                  {/* === AKHIR BLOK ANDA === */}
                 </>
               )}
             </div>
@@ -101,18 +107,33 @@ export default function DrawerMenu({ onRequestClose, onCloseComplete }: DrawerMe
 
           <hr className="drawer-divider" />
 
+          {/* === INI KODE REKAN SETIM ANDA (MENU DINAMIS) YANG DIGABUNGKAN === */}
           <ul className="menu-list">
-            {menuItems.map((item) => (
-              <li key={item}>
-                {/* Anda juga bisa mengubah ini menjadi <Link> nanti */}
-                <a href="#" onClick={(e) => e.preventDefault()}>
-                  {item}
+            {APP_PAGES.map((item) => (
+              <li key={item.key}>
+                <a href={item.href ?? "#"} onClick={handleMenuItemClick(item)}>
+                  {item.label}
                 </a>
+                {item.subPages?.length ? (
+                  <ul className="submenu-list">
+                    {item.subPages.map((sub) => (
+                      <li key={sub.key}>
+                        <a
+                          href={sub.href ?? "#"}
+                          onClick={handleMenuItemClick(sub)}
+                        >
+                          {sub.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
               </li>
             ))}
           </ul>
+          {/* === AKHIR BLOK REKAN SETIM ANDA === */}
         </div>
       </nav>
     </>
-  )
+  );
 }

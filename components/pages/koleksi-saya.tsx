@@ -1,0 +1,97 @@
+"use client"
+
+import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
+import PageLayout from "./page-layout"
+import Footer from "../footer"
+
+const collectionItems = Array.from({ length: 4 }).map((_, index) => ({
+  id: index + 1,
+  name: "Payung Geulis Karya Utama",
+  category: "Kerajinan",
+  city: "Kota Tasikmalaya",
+}))
+
+const COLLECTION_STORAGE_KEY = "nemuinaja_collection_bookmarks"
+
+export default function KoleksiSayaPage() {
+  const router = useRouter()
+  const [bookmarkedIds, setBookmarkedIds] = useState<number[]>([])
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(COLLECTION_STORAGE_KEY)
+      if (raw) setBookmarkedIds(JSON.parse(raw))
+    } catch {
+      setBookmarkedIds([])
+    }
+  }, [])
+
+  const toggleBookmark = (id: number) => {
+    setBookmarkedIds((prev) => {
+      const exists = prev.includes(id)
+      const next = exists ? prev.filter((x) => x !== id) : [...prev, id]
+      try {
+        localStorage.setItem(COLLECTION_STORAGE_KEY, JSON.stringify(next))
+      } catch {
+      }
+      return next
+    })
+  }
+
+  return (
+    <PageLayout containerClassName="collection-container" mainClassName="collection-page">
+      <header className="collection-header">
+        <button className="collection-back" aria-label="Kembali" onClick={() => router.back()}>
+          <svg width="50" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M15 18L9 12L15 6" stroke="#FAFAFA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+        <h1>
+          <span
+            className="muted"
+            style={{
+              background: "linear-gradient(90deg, #5AC4B5 0%, #303030 18%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >
+            Koleksi
+          </span>{" "}
+          saya
+        </h1>
+      </header>
+
+      <section className="collection-list">
+        {collectionItems.map((item) => {
+          const bookmarked = bookmarkedIds.includes(item.id)
+          return (
+            <article key={item.id} className="collection-card">
+              <div className="collection-avatar" aria-hidden="true">
+                <span role="img" aria-hidden="true">
+                  <img src="/profile-collestion.webp" alt="Profile UMKM" width={100} height={100} aria-hidden="true" />
+                </span>
+              </div>
+              <div className="collection-card-body">
+                <h3>{item.name}</h3>
+                <p>{item.category}</p>
+                <p className="collection-city">{item.city}</p>
+              </div>
+              <button
+                className={`collection-bookmark ${bookmarked ? "saved" : ""}`}
+                aria-pressed={bookmarked}
+                aria-label={bookmarked ? "Hapus dari koleksi" : "Simpan ke koleksi"}
+                onClick={() => toggleBookmark(item.id)}
+              >
+                <img src="/bookmark.webp" alt="" width={18} height={18} aria-hidden="true" />
+              </button>
+            </article>
+          )
+        })}
+      </section>
+
+      <Footer />
+    </PageLayout>
+  )
+}

@@ -10,7 +10,7 @@ export default function Faq() {
     { question: "Ingin lihat lokasnya di peta, bisa?", answer: "Ya, setiap UMKM memiliki lokasi di peta" },
     { question: "Bisa lihat daftar favorit?", answer: 'Tentu, akses dari menu "Favorit Saya"' },
     { question: "Bisa hubungi UMKM langsung dari situs?", answer: "Ya, tersedia tombol kontak di setiap profil UMKM" },
-    { question: "Aku mau komen, bisa?", answer: "Fitur komentar tersedia untuk pengguna terdaftar" },
+    { question: "Aku mau komen, bisa?", answer: "Fitur komentar tidak tersedia di website kami saat ini" },
   ]
 
   const toggleExpand = (index: number) => {
