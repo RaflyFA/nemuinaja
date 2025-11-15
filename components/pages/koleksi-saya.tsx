@@ -38,7 +38,6 @@ export default function KoleksiSayaPage() {
       return next
     })
   }
-
   return (
     <>
       <PageLayout containerClassName="collection-container" mainClassName="collection-page">
@@ -65,12 +64,9 @@ export default function KoleksiSayaPage() {
               />
             </svg>
           </button>
-          
           <h1 className="collection-title">
             <span className="muted">Koleksi</span> saya
           </h1>
-          
-          {}
           <div className="collection-header-spacer" aria-hidden="true" />
         </header>
         <section className="collection-list">

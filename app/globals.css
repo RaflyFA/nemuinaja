@@ -1409,13 +1409,8 @@ body.drawer-open .appbar {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  margin-top: 100;
+  margin-top: 80;
   text-align: center;
-}
-
-.collection-back:focus {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
 }
 
 .collection-header-spacer {
@@ -1474,10 +1469,30 @@ body.drawer-open .appbar {
 }
 
 .collection-bookmark {
-  background: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
   border: none;
-  font-size: 20px;
+  background: #f0f0f3;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.12);
+  transition: background 0.2s;
+}
+
+.collection-bookmark img {
+  width: 18px;
+  height: 18px;
+}
+
+.collection-bookmark.saved {
+  background: #1f1f25;
+}
+
+.collection-bookmark.saved img {
+  filter: invert(1);
 }
 
 /* ===== CTA DARK ===== */
@@ -1683,4 +1698,211 @@ body.drawer-open .appbar {
     margin-left: auto;
     margin-right: auto;
   }
+}
+.about-container {
+  min-height: 100vh;
+  background: #f7f7f9;
+}
+
+.about-page {
+  padding: 92px 16px 80px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.about-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 48px;
+  padding: 0 16px 24px;
+}
+
+.about-back {
+  align-self: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.85);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.18);
+}
+
+.about-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 80;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1d1d21;
+  text-align: center;
+}
+
+.about-header-spacer {
+  width: 30px;
+  height: 30px;
+}
+
+.about-header .muted {
+  background: linear-gradient(90deg, #5AC4B5 0%, #303030 26%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.about-hero {
+  width: 100%;
+  height: 220px;
+  border-radius: 32px;
+  background: linear-gradient(180deg, #dedee0, #cbcbce);
+  margin-bottom: 24px;
+}
+
+.about-section {
+  margin-bottom: 24px;
+}
+
+.about-section h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #1f1f25;
+}
+
+.about-section p {
+  color: #5b5b63;
+  line-height: 1.5;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.about-pill-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.about-pill {
+  background: #e7e7ea;
+  border-radius: 20px;
+  padding: 18px;
+}
+
+.about-pill h3 {
+  margin: 0 0 8px;
+  letter-spacing: 0.05em;
+  color: #4aa696;
+}
+
+.about-pill p {
+  margin: 0;
+  color: #4b4b55;
+  font-size: 14px;
+}
+
+.about-principles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.about-principle-card {
+  background: #eeeeef;
+  border-radius: 18px;
+  padding: 16px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.about-principle-card .icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #d4d4d9;
+  color: #1f1f25;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-principle-card h3 {
+  margin: 0 0 4px;
+  font-size: 15px;
+}
+
+.about-principle-card p {
+  margin: 0;
+  font-size: 13px;
+  color: #5c5c63;
+}
+
+.about-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.about-stat {
+  flex: 1 1 140px;
+  background: #ededf0;
+  border-radius: 16px;
+  padding: 14px;
+  text-align: center;
+}
+
+.about-stat .value {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: #4fb7a6;
+}
+
+.about-stat .label {
+  font-size: 13px;
+  color: #5c5c63;
+}
+
+.about-cta {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.about-cta p {
+  margin-bottom: 16px;
+  font-weight: 600;
+  color: #3e3e44;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.cta-outline,
+.cta-solid {
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-weight: 600;
+  border: 1.4px solid #1f4b3f;
+  color: #1f4b3f;
+  background: transparent;
+  cursor: pointer;
+}
+
+.cta-solid {
+  background: #1f4b3f;
+  color: #ffffff;
 }
