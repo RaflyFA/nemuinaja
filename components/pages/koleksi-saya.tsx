@@ -40,58 +40,68 @@ export default function KoleksiSayaPage() {
   }
 
   return (
-    <PageLayout containerClassName="collection-container" mainClassName="collection-page">
-      <header className="collection-header">
-        <button className="collection-back" aria-label="Kembali" onClick={() => router.back()}>
-          <svg width="50" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M15 18L9 12L15 6" stroke="#FAFAFA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
-        <h1>
-          <span
-            className="muted"
-            style={{
-              background: "linear-gradient(90deg, #5AC4B5 0%, #303030 18%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
+    <>
+      <PageLayout containerClassName="collection-container" mainClassName="collection-page">
+        <header className="collection-header">
+          <button
+            className="collection-back"
+            onClick={() => router.back()}
+            aria-label="Kembali"
           >
-            Koleksi
-          </span>{" "}
-          saya
-        </h1>
-      </header>
-
-      <section className="collection-list">
-        {collectionItems.map((item) => {
-          const bookmarked = bookmarkedIds.includes(item.id)
-          return (
-            <article key={item.id} className="collection-card">
-              <div className="collection-avatar" aria-hidden="true">
-                <span role="img" aria-hidden="true">
-                  <img src="/profile-collestion.webp" alt="Profile UMKM" width={100} height={100} aria-hidden="true" />
-                </span>
-              </div>
-              <div className="collection-card-body">
-                <h3>{item.name}</h3>
-                <p>{item.category}</p>
-                <p className="collection-city">{item.city}</p>
-              </div>
-              <button
-                className={`collection-bookmark ${bookmarked ? "saved" : ""}`}
-                aria-pressed={bookmarked}
-                aria-label={bookmarked ? "Hapus dari koleksi" : "Simpan ke koleksi"}
-                onClick={() => toggleBookmark(item.id)}
-              >
-                <img src="/bookmark.webp" alt="" width={18} height={18} aria-hidden="true" />
-              </button>
-            </article>
-          )
-        })}
-      </section>
-
-      <Footer />
-    </PageLayout>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                d="M15 18L9 12L15 6"
+                stroke="#FAFAFA"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+          
+          <h1 className="collection-title">
+            <span className="muted">Koleksi</span> saya
+          </h1>
+          
+          {}
+          <div className="collection-header-spacer" aria-hidden="true" />
+        </header>
+        <section className="collection-list">
+          {collectionItems.map((item) => {
+            const bookmarked = bookmarkedIds.includes(item.id)
+            return (
+              <article key={item.id} className="collection-card">
+                <div className="collection-avatar" aria-hidden="true">
+                  <span role="img" aria-hidden="true">
+                    <img src="/profile-collestion.webp" alt="Profile UMKM" width={100} height={100} aria-hidden="true" />
+                  </span>
+                </div>
+                <div className="collection-card-body">
+                  <h3>{item.name}</h3>
+                  <p>{item.category}</p>
+                  <p className="collection-city">{item.city}</p>
+                </div>
+                <button
+                  className={`collection-bookmark ${bookmarked ? "saved" : ""}`}
+                  aria-pressed={bookmarked}
+                  aria-label={bookmarked ? "Hapus dari koleksi" : "Simpan ke koleksi"}
+                  onClick={() => toggleBookmark(item.id)}
+                >
+                  <img src="/bookmark.webp" alt="" width={18} height={18} aria-hidden="true" />
+                </button>
+              </article>
+            )
+          })}
+        </section>
+      </PageLayout>
+    <Footer />
+    </>
   )
 }
