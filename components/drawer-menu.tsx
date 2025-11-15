@@ -131,7 +131,6 @@ export default function DrawerMenu({
               </li>
             ))}
           </ul>
-          {/* === AKHIR BLOK REKAN SETIM ANDA === */}
         </div>
       </nav>
     </>

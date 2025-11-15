@@ -1,75 +1,144 @@
-"use client"
+"use client";
 
-import type React from "react"
-
-import { useState, useRef } from "react"
+import type React from "react";
+import { useState, useRef } from "react";
+// import Image from "next/image"; // Dihapus untuk memperbaiki error kompilasi
+import { ChevronLeft, ChevronRight } from "lucide-react"; // Kita butuh ikon panah
 
 export default function Carousel() {
-  const [currentSlide, setCurrentSlide] = useState(0)
-  // useRef for touch coordinates to avoid setState async timing issues
-  const touchStartRef = useRef<number | null>(null)
-  const carouselRef = useRef<HTMLDivElement>(null)
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const touchStartRef = useRef<number | null>(null);
 
+  // --- DATA SLIDE (Ganti dengan gambar Anda) ---
   const slides = [
     {
       id: 1,
-      title: "Slide 1",
-      text: "ini ada 5 foto di slide oleh kursor atau tangan atau klik dengan ikon arrow juga bisa",
+      img: "./public/6667f8f82be01f5fc9c94c11_contoh umkm di desa.webp",
+      text: "Soto Sederhana",
     },
-    { id: 2, title: "Slide 2", text: "Jelajahi koleksi terbaik dari pengrajin lokal" },
-    { id: 3, title: "Slide 3", text: "Temukan produk unik dan berkualitas tinggi" },
-    { id: 4, title: "Slide 4", text: "Dukung UMKM lokal dengan berbelanja" },
-    { id: 5, title: "Slide 5", text: "Rasakan pengalaman berbelanja yang tak terlupakan" },
-  ]
+    {
+      id: 2,
+      img: "https://placehold.co/800x450/303030/white?text=Gambar+UMKM+2",
+      text: "Bakso Istimewa",
+    },
+    {
+      id: 3,
+      img: "https://placehold.co/800x450/5AC4B5/white?text=Gambar+UMKM+3",
+      text: "Kopi Kenangan",
+    },
+    {
+      id: 4,
+      img: "https://placehold.co/800x450/303030/white?text=Gambar+UMKM+4",
+      text: "Martabak Asin",
+    },
+    {
+      id: 5,
+      img: "https://placehold.co/800x450/5AC4B5/white?text=Gambar+UMKM+5",
+      text: "Nasi Goreng Gila",
+    },
+  ];
+  // ---------------------------------------------
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length)
-  }
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
-  }
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
 
   const goToSlide = (index: number) => {
-    setCurrentSlide(index)
-  }
+    setCurrentSlide(index);
+  };
 
+  // --- Logika Swipe (Geser) ---
   const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartRef.current = e.targetTouches[0].clientX
-  }
+    touchStartRef.current = e.targetTouches[0].clientX;
+  };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    const startX = touchStartRef.current
-    const endX = e.changedTouches[0].clientX
-    touchStartRef.current = null
-    if (startX == null) return
-    const distance = startX - endX
-    const threshold = 50
-    if (distance > threshold) nextSlide()
-    else if (distance < -threshold) prevSlide()
-  }
+    const startX = touchStartRef.current;
+    const endX = e.changedTouches[0].clientX;
+    touchStartRef.current = null;
+    if (startX == null) return;
+    const distance = startX - endX;
+    const threshold = 50; // Jarak minimal geser
+    if (distance > threshold) nextSlide();
+    else if (distance < -threshold) prevSlide();
+  };
 
   return (
-    <section className="carousel-section">
-      <div className="carousel-container" ref={carouselRef} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
-        <button className="carousel-arrow prev" onClick={prevSlide} aria-label="Previous slide">
-          ‹
-        </button>
-
-        <div className="carousel-slide">
-          <div className="slide-placeholder">{slides[currentSlide].text}</div>
+    // Section utama, padding vertikal, dan batasi lebar max
+    <section
+      className="py-12 w-full max-w-sm mx-auto"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
+      {/* Container relatif untuk tombol panah */}
+      <div className="relative">
+        {/* Viewport: Menyembunyikan slide yang 'overflow' */}
+        <div className="overflow-hidden rounded-lg h-52">
+          {/* Track: Ini adalah 'flex' container
+            Ini yang akan bergeser ke samping
+          */}
+          <div
+            className="flex h-full transition-transform duration-500 ease-in-out"
+            style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+          >
+            {/* Render semua slide/gambar */}
+            {slides.map((slide) => (
+              <div
+                key={slide.id}
+                // Setiap slide: lebar 100% dan tidak akan 'shrink'
+                className="relative h-full w-full flex-shrink-0"
+              >
+                {/* --- PERBAIKAN --- */}
+                {/* Mengganti next/image dengan <img> standar */}
+                <img
+                  src={slide.img}
+                  alt={slide.text}
+                  className="w-full h-full object-cover" // Menggunakan Tailwind untuk 'fill' dan 'objectFit'
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
-        <button className="carousel-arrow next" onClick={nextSlide} aria-label="Next slide">
-          ›
+        {/* Tombol Kiri */}
+        <button
+          className="absolute top-1/2 left-2 -translate-y-1/2 z-10
+                     w-10 h-10 rounded-full bg-gray-800 bg-opacity-70 text-white 
+                     flex items-center justify-center hover:bg-opacity-100 transition-all"
+          onClick={prevSlide}
+          aria-label="Previous slide"
+        >
+          <ChevronLeft size={24} />
+        </button>
+
+        {/* Tombol Kanan */}
+        <button
+          className="absolute top-1/2 right-2 -translate-y-1/2 z-10
+                     w-10 h-10 rounded-full bg-gray-800 bg-opacity-70 text-white 
+                     flex items-center justify-center hover:bg-opacity-100 transition-all"
+          onClick={nextSlide}
+          aria-label="Next slide"
+        >
+          <ChevronRight size={24} />
         </button>
       </div>
 
-      <div className="carousel-dots">
+      {/* Dots Indikator */}
+      <div className="flex justify-center gap-2 mt-4">
         {slides.map((_, index) => (
           <button
             key={index}
-            className={`dot ${index === currentSlide ? "active" : ""}`}
+            className={`h-2 rounded-full transition-all duration-300
+                       ${
+                         index === currentSlide
+                           ? "w-6 bg-gray-800" // Dot aktif
+                           : "w-2 bg-gray-300" // Dot non-aktif
+                       }`}
             onClick={() => goToSlide(index)}
             aria-label={`Go to slide ${index + 1}`}
             aria-current={index === currentSlide}
@@ -77,5 +146,5 @@ export default function Carousel() {
         ))}
       </div>
     </section>
-  )
+  );
 }

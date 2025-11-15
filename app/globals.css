@@ -140,7 +140,8 @@ html,
 body {
   width: 100%;
   height: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, sans-serif;
 }
 
 body {
@@ -236,7 +237,8 @@ body.drawer-open .appbar {
 }
 
 .nemuinaja-text {
-  font-family: "SF Pro Rounded", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "SF Pro Rounded", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
 }
 
 .logo-icon {
@@ -250,23 +252,23 @@ body.drawer-open .appbar {
   margin-right: -8px;
 }
 
-  .icon-btn {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-    padding: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.3s ease-out;
-  }
+.icon-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease-out;
+}
 
-  .icon-btn.active {
-    opacity: 0;
-    pointer-events: none;
-  }
+.icon-btn.active {
+  opacity: 0;
+  pointer-events: none;
+}
 
 .icon-btn:hover {
   opacity: 0.7;
@@ -325,7 +327,7 @@ body.drawer-open .appbar {
 .drawer-search.closing {
   /* start sliding up immediately and take slightly longer for a smoother feel
      use a non-overshooting easing (no bounce) */
-  animation: slideUpDrawer 0.52s cubic-bezier(0.22, 0.0, 0.0, 1.0) forwards;
+  animation: slideUpDrawer 0.52s cubic-bezier(0.22, 0, 0, 1) forwards;
   animation-delay: 0s;
 }
 
@@ -381,7 +383,8 @@ body.drawer-open .appbar {
 
 /* inner content fade/slide when closing: align durations with drawer slide so content remains visible while the drawer moves */
 .drawer-inner {
-  transition: transform 0.52s cubic-bezier(0.22, 0.0, 0.0, 1.0), opacity 0.52s cubic-bezier(0.22, 0.0, 0.0, 1.0);
+  transition: transform 0.52s cubic-bezier(0.22, 0, 0, 1),
+    opacity 0.52s cubic-bezier(0.22, 0, 0, 1);
 }
 
 /* when closing, slightly lift and fade the inner content together with the drawer slide */
@@ -605,25 +608,25 @@ body.drawer-open .appbar {
   border-radius: 20px;
   font-size: 12px;
   cursor: pointer;
-  transition: all 0.24s cubic-bezier(0.22,0,0,1);
+  transition: all 0.24s cubic-bezier(0.22, 0, 0, 1);
   font-weight: 400;
 }
 
 .chip:hover {
-  background-color: #5AC4B5;
-  border-color: #5AC4B5;
-  color: #FAFAFA;
+  background-color: #5ac4b5;
+  border-color: #5ac4b5;
+  color: #fafafa;
 }
 
 .chip:active {
-  background-color: #5AC4B5;
-  border-color: #5AC4B5;
-  color: #FAFAFA;
+  background-color: #5ac4b5;
+  border-color: #5ac4b5;
+  color: #fafafa;
   font-weight: 700;
 }
 
 .chip:focus {
-  outline: 2px solid #5AC4B5;
+  outline: 2px solid #5ac4b5;
   outline-offset: 2px;
 }
 
@@ -665,15 +668,15 @@ body.drawer-open .appbar {
 }
 
 .btn-primary {
-  background-color: #5AC4B5;
-  color: #FAFAFA;
+  background-color: #5ac4b5;
+  color: #fafafa;
   border: 1px solid transparent;
 }
 
 .btn-primary:hover {
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   color: var(--ink);
-  border: 1px solid #5AC4B5;
+  border: 1px solid #5ac4b5;
   transform: translateY(0);
 }
 
@@ -683,27 +686,27 @@ body.drawer-open .appbar {
 }
 
 .btn-accent {
-  background-color: #5AC4B5;
-  color: #FAFAFA;
+  background-color: #5ac4b5;
+  color: #fafafa;
   border: 1px solid transparent;
 }
 
 .btn-accent:hover {
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   color: var(--ink);
-  border: 1px solid #5AC4B5;
+  border: 1px solid #5ac4b5;
   transform: translateY(0);
 }
 
 .btn-accent:active {
-  background-color: #5AC4B5;
-  color: #FAFAFA;
-  border: 1px solid #5AC4B5;
+  background-color: #5ac4b5;
+  color: #fafafa;
+  border: 1px solid #5ac4b5;
   font-weight: 700;
 }
 
 .btn-accent:focus {
-  outline: 2px solid #5AC4B5;
+  outline: 2px solid #5ac4b5;
   outline-offset: 2px;
 }
 
@@ -835,7 +838,7 @@ body.drawer-open .appbar {
   overflow: hidden;
   transform: scale(0.75) rotateY(25deg) translateZ(-50px);
   opacity: 0.4;
-  transition: all 0.4s cubic-bezier(0.22,0,0,1);
+  transition: all 0.4s cubic-bezier(0.22, 0, 0, 1);
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   border: 1px solid #f0f0f0;
@@ -1017,7 +1020,7 @@ body.drawer-open .appbar {
   position: absolute;
   top: -10px;
   right: 12px; /* move badge to right */
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .directory-section-title h2 {
@@ -1145,7 +1148,7 @@ body.drawer-open .appbar {
 }
 
 .directory-scrollbar .dot:focus {
-  outline: 2px solid rgba(0,0,0,0.08);
+  outline: 2px solid rgba(0, 0, 0, 0.08);
 }
 
 .directory-stack-card {
@@ -1243,7 +1246,7 @@ body.drawer-open .appbar {
   height: 40px;
   border-radius: 50%;
   border: none;
-  background: rgba(0,0,0,0.85);
+  background: rgba(0, 0, 0, 0.85);
   color: white;
   font-size: 18px;
   cursor: pointer;
@@ -1433,212 +1436,10 @@ body.drawer-open .appbar {
 }
 
 .collection-bookmark {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
+  background: none;
   border: none;
-  background: #f0f0f3;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s ease;
-  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.12);
-}
-
-.collection-bookmark img {
-  width: 18px;
-  height: 18px;
-}
-
-.collection-bookmark.saved {
-  background: #1d1d21;
-}
-
-.collection-bookmark.saved img {
-  filter: invert(1);
-}
-
-/* ===== ABOUT ===== */
-.about-container {
-  min-height: 100vh;
-  background: #f7f7f9;
-}
-
-.about-page {
-  padding: 92px 16px 72px;
-  max-width: 640px;
-  margin: 0 auto;
-}
-
-.about-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 24px;
-}
-
-.about-back {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(0, 0, 0, 0.85);
-  color: white;
-  font-size: 18px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 6px 12px rgba(15, 23, 42, 0.12);
-}
-
-.about-header h1 {
   font-size: 20px;
-  font-weight: 600;
-}
-
-.about-hero {
-  width: 100%;
-  height: 220px;
-  border-radius: 32px;
-  background: linear-gradient(180deg, #dedee0, #cdcdcf);
-  margin-bottom: 24px;
-}
-
-.about-section {
-  margin-bottom: 24px;
-  color: #1f1f25;
-}
-
-.about-section h2 {
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.about-section p {
-  color: #5a5a61;
-  line-height: 1.5;
-  font-size: 13px;
-  margin-bottom: 12px;
-}
-
-.about-pill-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 24px;
-}
-
-.about-pill {
-  background: #e7e7ea;
-  border-radius: 18px;
-  padding: 16px;
-}
-
-.about-pill h3 {
-  margin: 0 0 8px;
-  font-size: 18px;
-  letter-spacing: 0.05em;
-  color: #4aa696;
-}
-
-.about-pill p {
-  margin: 0;
-  color: #4b4b52;
-  font-size: 14px;
-}
-
-.about-principles {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 12px;
-}
-
-.about-principle-card {
-  background: #eeeeef;
-  border-radius: 18px;
-  padding: 16px;
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-}
-
-.about-principle-card .icon {
-  font-size: 24px;
-}
-
-.about-principle-card h3 {
-  margin: 0 0 4px;
-  font-size: 15px;
-}
-
-.about-principle-card p {
-  margin: 0;
-  font-size: 13px;
-  color: #5c5c63;
-}
-
-.about-stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 24px;
-}
-
-.about-stat {
-  flex: 1 1 140px;
-  background: #ededf1;
-  border-radius: 16px;
-  padding: 14px;
-  text-align: center;
-}
-
-.about-stat .value {
-  display: block;
-  font-size: 20px;
-  font-weight: 700;
-  color: #5ac4b5;
-}
-
-.about-stat .label {
-  font-size: 13px;
-  color: #5c5c63;
-}
-
-.about-cta {
-  margin-bottom: 32px;
-  text-align: center;
-  color: #3c3c42;
-}
-
-.about-cta p {
-  margin-bottom: 16px;
-  font-weight: 600;
-  color: #3e3e44;
-}
-
-.cta-buttons {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-}
-
-.cta-outline,
-.cta-solid {
-  border-radius: 999px;
-  padding: 10px 20px;
-  font-weight: 600;
-  border: 1.5px solid #1f4b3f;
-  background: transparent;
-  color: #1f4b3f;
   cursor: pointer;
-}
-
-.cta-solid {
-  background: #1f4b3f;
-  color: white;
 }
 
 /* ===== CTA DARK ===== */
@@ -1694,7 +1495,7 @@ body.drawer-open .appbar {
   color: var(--ink);
   font-size: 14px;
   font-weight: 500;
-  padding: 8px 0;
+  padding: 8px 4px;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
@@ -1704,7 +1505,7 @@ body.drawer-open .appbar {
 }
 
 .faq-question:hover {
-  color: var(--accent);
+  color: black;
 }
 
 .faq-question:focus {
@@ -1724,20 +1525,19 @@ body.drawer-open .appbar {
 .faq-answer {
   font-size: 13px;
   color: var(--text-light);
-  padding: 12px 0;
+  padding: 0;
   line-height: 1.5;
-  animation: slideDown 0.3s ease-out;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease-out, opacity 0.3s ease-out,
+    padding 0.3s ease-out;
 }
 
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.faq-answer.open {
+  max-height: 500px;
+  opacity: 1;
+  padding: 12px 0;
 }
 
 /* ===== FOOTER ===== */
@@ -1808,9 +1608,35 @@ body.drawer-open .appbar {
   margin: 16px 0;
 }
 
-.footer-copyright {
-  font-size: 11px;
-  opacity: 0.7;
+/* Social icons: keep neutral visuals on hover (no color swap) */
+.social-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  text-decoration: none;
+  transition: none;
+  font-size: 18px;
+}
+
+.social-icons a:hover {
+  /* no visual change on hover for social icons */
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.social-icons a:focus {
+  outline: 2px solid white;
+}
+
+/* ensure any image icons don't change color on hover */
+.social-icons a img {
+  transition: none;
+  filter: none;
 }
 
 /* ===== RESPONSIVE ===== */
