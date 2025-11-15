@@ -22,7 +22,7 @@ export default function AppBar({ onMenuClick, onSearchClick, menuOpen = false, s
             <img src="/search.webp" alt="Search" className="icon-img" style={{ width: "17px", height: "17px" }}/>
           </button>
           <button className={`icon-btn hamburger ${menuOpen ? 'active' : ''}`} aria-label="Menu" onClick={onMenuClick}>
-            ☰
+            <img src="/hamburger.webp" alt="Search" className="icon-img" style={{ width: "17px", height: "17px" }}/>
           </button>
         </div>
       </div>

@@ -24,7 +24,7 @@ export default function Faq() {
     },
     {
       question: "Aku mau komen, bisa?",
-      answer: "Fitur komentar tersedia untuk pengguna terdaftar",
+      answer: "Fitur komentar akan tersedia di versi selanjutnya",
     },
   ];
 

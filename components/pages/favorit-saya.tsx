@@ -40,22 +40,34 @@ export default function FavoritSayaPage() {
     <>
       <PageLayout containerClassName="favorites-container" mainClassName="favorites-page">
         <header className="favorites-header">
-          <h1>
-            <span className="muted" style={{
-            background: 'linear-gradient(90deg, #5AC4B5 0%, #303030 18%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text'
-          }}>Favorit</span> saya
-          </h1>
-        </header>
-        <div className="favorites-back-row">
-          <button className="favorites-back" onClick={() => router.back()} aria-label="Kembali">
-            <svg width="50" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M15 18L9 12L15 6" stroke="#FAFAFA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          <button
+            className="favorites-back"
+            onClick={() => router.back()}
+            aria-label="Kembali"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                d="M15 18L9 12L15 6"
+                stroke="#FAFAFA"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </button>
-        </div>
+          <h1 className="favorites-title">
+            <span className="muted">Favorit</span> saya
+          </h1>
+          {}
+          <div className="favorites-header-spacer" aria-hidden="true" />
+        </header>
 
         <section className="favorites-grid">
           {favoriteItems.map((item) => (

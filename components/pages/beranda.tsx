@@ -10,13 +10,17 @@ import Footer from "../footer"
 
 export default function BerandaPage() {
   return (
-    <PageLayout mainClassName="home-content">
-      <Hero />
-      <Carousel />
-      <Categories />
-      <CtaDark />
-      <Faq />
+    <>
+      <PageLayout mainClassName="home-content">
+        <Hero />
+        <Carousel />
+        <Categories />
+        <CtaDark />
+        <Faq />
+      </PageLayout>
+
       <Footer />
-    </PageLayout>
+    </>
   )
 }
+

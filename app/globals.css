@@ -192,7 +192,6 @@ body.drawer-open {
   justify-content: center;
   width: 100%;
   transition: opacity 0.32s ease-out, transform 0.32s ease-out;
-  /* default is slightly above so slide-in feels natural */
   transform: translateY(-4px);
 }
 
@@ -211,7 +210,6 @@ body.drawer-open {
   gap: 8px;
   font-weight: 600;
   font-size: 16px;
-  /* Logo positioned more to the left and less padding */
   margin-left: -4px;
   transition: opacity 0.3s ease-out;
 }
@@ -221,17 +219,12 @@ body.drawer-open {
   pointer-events: none;
 }
 
-/* when a drawer is open and the AppBar should be behind, reduce opacity of elements
-   (logo/icons already handle hiding). When drawer is closing (still mounted but
-   parent requested close), promote the AppBar and animate it in front of the drawer */
 body.drawer-closing .appbar {
-  z-index: 102; /* above drawer (drawer z-index: 101) */
+  z-index: 102;
   opacity: 1;
   transform: translateY(0);
 }
 
-/* when drawer is fully open, keep AppBar slightly hidden to emphasize drawer
-   (logo and icons are individually faded). This keeps the bar visually behind */
 body.drawer-open .appbar {
   z-index: 100;
 }
@@ -248,7 +241,6 @@ body.drawer-open .appbar {
 .appbar-actions {
   display: flex;
   gap: 4px;
-  /* Move icons more to the right and compress spacing */
   margin-right: -8px;
 }
 
@@ -1229,10 +1221,12 @@ body.drawer-open .appbar {
 }
 
 .favorites-header {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 24px;
+  margin-bottom: 48px;
+  padding: 0px 16px 24px;
 }
 
 .favorites-back-row {
@@ -1242,8 +1236,9 @@ body.drawer-open .appbar {
 }
 
 .favorites-back {
-  width: 40px;
-  height: 40px;
+  align-self: center;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   border: none;
   background: rgba(0, 0, 0, 0.85);
@@ -1268,7 +1263,19 @@ body.drawer-open .appbar {
 }
 
 .favorites-header .muted {
-  color: #63cbbb;
+  background: linear-gradient(90deg, #5AC4B5 0%, #303030 18%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+}
+
+.favorites-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 80;
+  text-align: center;
 }
 
 .favorites-grid {
@@ -1540,18 +1547,18 @@ body.drawer-open .appbar {
   padding: 12px 0;
 }
 
-/* ===== FOOTER ===== */
+
 .footer {
   background-color: var(--dark-surface);
   color: white;
-  padding: 24px 16px;
+  padding: 18px 16px;
   width: 100%;
   box-sizing: border-box;
 }
 
 .footer-content {
   max-width: 940px;
-  margin: 0 auto;
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1569,7 +1576,6 @@ body.drawer-open .appbar {
 .footer-title {
   font-size: 13px;
   font-weight: 600;
-  margin-bottom: 12px;
 }
 
 .social-icons {
