@@ -1119,6 +1119,268 @@ body.drawer-open .appbar {
   margin: 8px 0;
 }
 
+.apply-container {
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+.apply-blur {
+  filter: blur(4px);
+  pointer-events: none;
+}
+.apply-page {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 48px 16px 60px;
+}
+
+.apply-page-header {
+  text-align: center;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.apply-page-header span {
+  display: block;
+  color: #6e6e76;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.apply-page-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 12px auto 0;
+}
+
+.apply-page-header h1 span {
+  color: #2f8f80;
+}
+
+.apply-card {
+  background: #ffffff;
+  border-radius: 26px;
+  padding: 40px 20px 32px;
+  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+}
+
+.apply-card img {
+  display: block;
+  margin: 0 auto 8px;
+}
+
+.apply-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.apply-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.apply-field span {
+  font-size: 13px;
+  color: #6e6e76;
+}
+
+.apply-field input,
+.apply-field textarea,
+.apply-field select {
+  border: none;
+  border-radius: 24px;
+  background: #e4e4e7;
+  padding: 14px 18px;
+  font-size: 15px;
+  color: #1f1f24;
+}
+
+.apply-field textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.apply-field select {
+  appearance: none;
+  width: 100%;
+  background: transparent;
+}
+
+.apply-select {
+  position: relative;
+  border-radius: 24px;
+  background: #e4e4e7;
+}
+
+.apply-select-arrow {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #6e6e76;
+}
+
+.apply-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: #5a5a63;
+}
+
+.apply-checkbox input {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+}
+
+.apply-checkbox a {
+  color: #2f8f80;
+  text-decoration: underline;
+}
+
+.apply-terms-link {
+  border: none;
+  background: none;
+  color: #2f8f80;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+}
+
+.apply-submit {
+  border: none;
+  background: linear-gradient(90deg, #46c1b0, #1f6655);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 14px;
+  cursor: pointer;
+  margin-top: 6px;
+}
+
+.apply-upload {
+  background: #e9eaec;
+  border-radius: 28px;
+  padding: 24px;
+  text-align: center;
+}
+
+.apply-upload-title {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.apply-upload-desc {
+  font-size: 13px;
+  color: #6e6e74;
+  margin-bottom: 16px;
+}
+
+.apply-upload-btn {
+  border: none;
+  background: linear-gradient(120deg, #55c3b2, #1f6454);
+  color: white;
+  font-weight: 600;
+  border-radius: 20px;
+  padding: 12px 28px;
+  cursor: pointer;
+}
+
+.apply-upload-types {
+  font-size: 12px;
+  color: #7a7a82;
+  margin-top: 10px;
+}
+
+.apply-modal ol {
+  list-style: none;
+  counter-reset: terms-counter;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.apply-modal li {
+  counter-increment: terms-counter;
+  font-size: 14px;
+  color: #4a4a53;
+  line-height: 1.5;
+  position: relative;
+  padding-left: 36px;
+}
+
+.apply-modal li::before {
+  content: counter(terms-counter);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  border: 1px solid #2f8f80;
+  color: #2f8f80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.apply-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 400;
+}
+
+.apply-modal {
+  width: 100%;
+  max-width: 420px;
+  max-height: calc(100vh - 80px);
+  background: #ffffff;
+  border-radius: 30px;
+  padding: 32px 20px 28px;
+  position: relative;
+  overflow-y: auto;
+}
+
+.apply-modal-close {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  border: none;
+  background: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.apply-modal-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.apply-modal-header h2 {
+  margin: 12px 0 0;
+  font-size: 20px;
+}
+
+.apply-modal-header span {
+  color: #2f8f80;
+}
 /* ===== SEARCH DRAWER ===== */
 .search-container {
   margin-top: 40px;
@@ -2552,3 +2814,4 @@ body.drawer-open .appbar {
   background: #1f4b3f;
   color: #ffffff;
 }
+
