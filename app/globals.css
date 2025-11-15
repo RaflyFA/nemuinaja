@@ -422,6 +422,7 @@ body.drawer-open .appbar {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
 }
 
 .user-greeting {
@@ -957,6 +958,14 @@ body.drawer-open .appbar {
   background: none;
   color: #1f4b3f;
   cursor: pointer;
+}
+
+.profile-success {
+  font-size: 13px;
+  color: #1f4b3f;
+  background: #e1f4ef;
+  border-radius: 16px;
+  padding: 10px 12px;
 }
 
 .profile-avatar-large {

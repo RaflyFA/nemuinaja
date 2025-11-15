@@ -26,7 +26,7 @@ export default function Hero() {
       </p>
       <button className="btn btn-primary" onClick={() => router.push("/direktori")}>
         Eksplor UMKM
-        <span className="btn-arrow">→</span>
+        <img src="/arrow.webp" alt="Next" className="icon-img" style={{ width: "17px", height: "17px" }}/>
       </button>
     </section>
   )

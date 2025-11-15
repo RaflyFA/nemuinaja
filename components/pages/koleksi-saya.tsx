@@ -23,7 +23,7 @@ export default function KoleksiSayaPage() {
   useEffect(() => {
     if (!isReady) return
     if (!isAuthenticated) {
-      router.replace("/login")
+      router.replace("/profil")
     }
   }, [isAuthenticated, isReady, router])
 

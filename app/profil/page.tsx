@@ -6,7 +6,9 @@ import PageLayout from "../../components/pages/page-layout"
 import Footer from "../../components/footer"
 import { useAuth } from "../../lib/auth-context"
 
-type AuthMode = "login" | "register" | "username"
+const OWNER_EMAILS = new Set(["payunggeulismandiri@gmail.com"])
+
+type AuthMode = "login" | "register" | "username" | "forgot"
 type AccountType = "user" | "owner"
 
 export default function ProfilPage() {
@@ -14,7 +16,11 @@ export default function ProfilPage() {
 
   return (
     <>
-      <PageLayout containerClassName="profile-container" mainClassName="profile-page">
+      <PageLayout
+        containerClassName="profile-container"
+        mainClassName="profile-page"
+        hideAppBar={!isAuthenticated}
+      >
         {isAuthenticated && user ? (
           user.hasUmkm ? <UmkmProfileView /> : <UserProfileView />
         ) : (
@@ -34,37 +40,46 @@ function ProfileAuthScreen() {
     <section className="profile-auth">
       <div className="profile-auth-header">
         <h1>
-          {mode === "login" ? "Masuk ke akun" : mode === "register" ? "Daftarkan akun" : "Masukkan nama pengguna"}{" "}
+          {mode === "login" ? "Masuk ke akun" : mode === "register" ? "Daftarkan akun" : mode === "forgot" ? "Lupa kata sandi" : "Masukkan nama pengguna"}{" "}
           <span>nemuin</span>
         </h1>
-        <p>Pilih mode yang kamu mau terus ikuti langkahnya ya.</p>
+        <p>
+          {mode === "login"
+            ? "Masukkan email dan kata sandi sesuai akunmu."
+            : mode === "forgot"
+            ? "Kami akan kirim tautan verifikasi ke email kamu."
+            : "Pilih mode yang kamu mau terus ikuti langkahnya ya."}
+        </p>
       </div>
 
-      <div className="profile-auth-toggle">
-        <button
-          type="button"
-          className={accountType === "user" ? "active" : ""}
-          onClick={() => setAccountType("user")}
-        >
-          Pengguna
-        </button>
-        <button
-          type="button"
-          className={accountType === "owner" ? "active" : ""}
-          onClick={() => setAccountType("owner")}
-        >
-          Pemilik UMKM
-        </button>
-      </div>
+      {mode !== "login" && (
+        <div className="profile-auth-toggle">
+          <button
+            type="button"
+            className={accountType === "user" ? "active" : ""}
+            onClick={() => setAccountType("user")}
+          >
+            Pengguna
+          </button>
+          <button
+            type="button"
+            className={accountType === "owner" ? "active" : ""}
+            onClick={() => setAccountType("owner")}
+          >
+            Pemilik UMKM
+          </button>
+        </div>
+      )}
 
-      {mode === "login" && <LoginForm accountType={accountType} onSwitchMode={setMode} />}
+      {mode === "login" && <LoginForm onSwitchMode={setMode} />}
+      {mode === "forgot" && <ForgotPasswordForm onSwitchMode={setMode} />}
       {mode === "register" && <RegisterForm accountType={accountType} onSwitchMode={setMode} />}
       {mode === "username" && <UsernameStep accountType={accountType} />}
     </section>
   )
 }
 
-function LoginForm({ accountType, onSwitchMode }: { accountType: AccountType; onSwitchMode: (m: AuthMode) => void }) {
+function LoginForm({ onSwitchMode }: { onSwitchMode: (m: AuthMode) => void }) {
   const router = useRouter()
   const { login } = useAuth()
   const [email, setEmail] = useState("")
@@ -78,13 +93,9 @@ function LoginForm({ accountType, onSwitchMode }: { accountType: AccountType; on
     if (!password) nextErrors.password = "Masukkan sandi"
     setErrors(nextErrors)
     if (Object.keys(nextErrors).length === 0) {
-      login(
-        accountType === "owner"
-          ? { hasUmkm: true }
-          : {
-              hasUmkm: false,
-            },
-      )
+      const normalizedEmail = email.trim().toLowerCase()
+      const isOwnerAccount = OWNER_EMAILS.has(normalizedEmail)
+      login(isOwnerAccount ? { hasUmkm: true } : { hasUmkm: false })
       router.push("/profil")
     }
   }
@@ -99,17 +110,14 @@ function LoginForm({ accountType, onSwitchMode }: { accountType: AccountType; on
 
       <label className={`profile-input ${errors.password ? "error" : ""}`}>
         <span>Masukkan kata sandi</span>
-        <input
-          type="password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-          placeholder="••••••••"
-        />
+        <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="********" />
       </label>
       {errors.password ? <p className="profile-input-hint">{errors.password}</p> : null}
 
       <div className="profile-auth-links">
-        <button type="button">Lupa sandi?</button>
+        <button type="button" onClick={() => onSwitchMode("forgot")}>
+          Lupa sandi?
+        </button>
       </div>
 
       <button className="profile-primary-btn" type="submit">
@@ -125,7 +133,40 @@ function LoginForm({ accountType, onSwitchMode }: { accountType: AccountType; on
     </form>
   )
 }
+function ForgotPasswordForm({ onSwitchMode }: { onSwitchMode: (mode: AuthMode) => void }) {
+  const [email, setEmail] = useState("")
+  const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault()
+    if (!email.trim()) {
+      setError("Masukkan email kamu")
+      return
+    }
+    setError(null)
+    setSubmitted(true)
+  }
+
+  return (
+    <form className="profile-form" onSubmit={handleSubmit}>
+      <label className={`profile-input ${error ? "error" : ""}`}>
+        <span>Email yang terdaftar</span>
+        <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="contoh@tes.com" />
+      </label>
+      {error ? <p className="profile-input-hint">{error}</p> : null}
+      {submitted ? <p className="profile-success">Kami telah mengirim tautan verifikasi ke email kamu.</p> : null}
+      <button className="profile-primary-btn" type="submit">
+        Kirim tautan reset
+      </button>
+      <p className="profile-auth-footer">
+        <button type="button" onClick={() => onSwitchMode("login")}>
+          Kembali ke masuk
+        </button>
+      </p>
+    </form>
+  )
+}
 function RegisterForm({
   accountType,
   onSwitchMode,
@@ -168,7 +209,7 @@ function RegisterForm({
           type="password"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
-          placeholder="••••••••"
+          placeholder="********"
         />
       </label>
       {errors.password ? <p className="profile-input-hint">{errors.password}</p> : null}
@@ -179,7 +220,7 @@ function RegisterForm({
           type="password"
           value={confirm}
           onChange={(event) => setConfirm(event.target.value)}
-          placeholder="••••••••"
+          placeholder="********"
         />
       </label>
       {errors.confirm ? <p className="profile-input-hint">{errors.confirm}</p> : null}
@@ -349,3 +390,5 @@ function UmkmProfileView() {
     </div>
   )
 }
+
+

@@ -10,9 +10,34 @@ type PageLayoutProps = {
   children: ReactNode
   containerClassName?: string
   mainClassName?: string
+  hideAppBar?: boolean
 }
 
-export default function PageLayout({ children, containerClassName = "home-container", mainClassName }: PageLayoutProps) {
+function PlainLayout({
+  children,
+  containerClassName,
+  mainClassName,
+}: {
+  children: ReactNode
+  containerClassName: string
+  mainClassName?: string
+}) {
+  return (
+    <div className={containerClassName}>
+      <main className={mainClassName ?? ""}>{children}</main>
+    </div>
+  )
+}
+
+function LayoutWithAppBar({
+  children,
+  containerClassName,
+  mainClassName,
+}: {
+  children: ReactNode
+  containerClassName: string
+  mainClassName?: string
+}) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [menuVisible, setMenuVisible] = useState(false)
@@ -80,5 +105,22 @@ export default function PageLayout({ children, containerClassName = "home-contai
 
       <main className={`${mainClassName ?? ""} ${isDrawerOpen ? "blur" : ""}`.trim()}>{children}</main>
     </div>
+  )
+}
+
+export default function PageLayout({
+  children,
+  containerClassName = "home-container",
+  mainClassName,
+  hideAppBar = false,
+}: PageLayoutProps) {
+  if (hideAppBar) {
+    return <PlainLayout containerClassName={containerClassName} mainClassName={mainClassName}>{children}</PlainLayout>
+  }
+
+  return (
+    <LayoutWithAppBar containerClassName={containerClassName} mainClassName={mainClassName}>
+      {children}
+    </LayoutWithAppBar>
   )
 }

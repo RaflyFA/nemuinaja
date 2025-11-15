@@ -52,7 +52,7 @@ export default function DrawerMenu({
     (event: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
       event.preventDefault();
       if (item.requiresAuth && !isAuthenticated) {
-        router.push("/login");
+        router.push("/profil");
         handleClose();
         return;
       }
@@ -122,7 +122,7 @@ export default function DrawerMenu({
                   <p className="user-greeting">Hai, Kamu</p>
                   <div className="user-links">
                     <Link
-                      href="/login"
+                      href="/profil"
                       className="user-link"
                       onClick={handleClose}
                     >
@@ -130,7 +130,7 @@ export default function DrawerMenu({
                     </Link>
                     <span className="link-separator">›</span>
                     <Link
-                      href="/register"
+                      href="/profil"
                       className="user-link"
                       onClick={handleClose}
                     >

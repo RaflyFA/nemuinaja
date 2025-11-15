@@ -208,7 +208,7 @@ export default function LoginForm() {
           <p className="mt-6 text-center text-base text-gray-600">
             Tidak memiliki akun?{" "}
             <Link
-              href="/register" // Kita akan buat halaman ini
+              href="/profil" // Kita akan buat halaman ini
               className="font-semibold text-[#45c1a8] hover:text-emerald-600"
             >
               Buat
