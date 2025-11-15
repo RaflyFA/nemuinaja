@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import PageLayout from "./page-layout"
 import Footer from "../footer"
+import { useAuth } from "../../lib/auth-context"
 
 const favoriteItems = Array.from({ length: 6 }).map((_, index) => ({
   id: index + 1,
@@ -16,7 +17,14 @@ const STORAGE_KEY = "nemuinaja_favorites_likes"
 
 export default function FavoritSayaPage() {
   const router = useRouter()
+  const { isAuthenticated, isReady } = useAuth()
   const [likedIds, setLikedIds] = useState<number[]>([])
+  useEffect(() => {
+    if (!isReady) return
+    if (!isAuthenticated) {
+      router.replace("/login")
+    }
+  }, [isAuthenticated, isReady, router])
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY)
@@ -36,6 +44,14 @@ export default function FavoritSayaPage() {
       return next
     })
   }
+  if (!isReady) {
+    return null
+  }
+
+  if (!isAuthenticated) {
+    return null
+  }
+
   return (
     <>
       <PageLayout containerClassName="favorites-container" mainClassName="favorites-page">

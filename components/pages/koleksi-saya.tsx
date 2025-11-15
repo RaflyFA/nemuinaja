@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import PageLayout from "./page-layout"
 import Footer from "../footer"
+import { useAuth } from "../../lib/auth-context"
 
 const collectionItems = Array.from({ length: 4 }).map((_, index) => ({
   id: index + 1,
@@ -16,7 +17,15 @@ const COLLECTION_STORAGE_KEY = "nemuinaja_collection_bookmarks"
 
 export default function KoleksiSayaPage() {
   const router = useRouter()
+  const { isAuthenticated, isReady } = useAuth()
   const [bookmarkedIds, setBookmarkedIds] = useState<number[]>([])
+
+  useEffect(() => {
+    if (!isReady) return
+    if (!isAuthenticated) {
+      router.replace("/login")
+    }
+  }, [isAuthenticated, isReady, router])
 
   useEffect(() => {
     try {
@@ -38,6 +47,14 @@ export default function KoleksiSayaPage() {
       return next
     })
   }
+  if (!isReady) {
+    return null
+  }
+
+  if (!isAuthenticated) {
+    return null
+  }
+
   return (
     <>
       <PageLayout containerClassName="collection-container" mainClassName="collection-page">
