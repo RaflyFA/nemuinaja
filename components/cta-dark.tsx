@@ -22,9 +22,6 @@ export default function CtaDark() {
           : "Tambahkan Produk Anda untuk menarik lebih banyak pelanggan dan membuat profil Anda lebih menarik."}
       </p>
       <button className="btn btn-accent">{isAuthenticated ? "Ajukan UMKM" : "Daftar Sekarang"}</button>
-      <p className="cta-footer">
-        ini menggunakan background batik gelap sedih terlihat, namun baternya sedih lebih terang!
-      </p>
     </section>
   )
 }

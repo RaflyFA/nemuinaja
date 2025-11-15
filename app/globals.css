@@ -1368,6 +1368,7 @@ body.drawer-open .appbar {
   justify-content: center;
   flex-shrink: 0;
   transition: all 0.2s;
+  
 }
 
 .carousel-arrow:hover {
@@ -1393,6 +1394,7 @@ body.drawer-open .appbar {
   border: none;
   cursor: pointer;
   transition: all 0.2s;
+  margin-top: 24px;
 }
 
 .dot.active {

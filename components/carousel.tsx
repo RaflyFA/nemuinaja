@@ -2,39 +2,37 @@
 
 import type React from "react";
 import { useState, useRef } from "react";
-// import Image from "next/image"; // Dihapus untuk memperbaiki error kompilasi
-import { ChevronLeft, ChevronRight } from "lucide-react"; // Kita butuh ikon panah
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function Carousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const touchStartRef = useRef<number | null>(null);
 
-  // --- DATA SLIDE (Ganti dengan gambar Anda) ---
   const slides = [
     {
       id: 1,
-      img: "./public/6667f8f82be01f5fc9c94c11_contoh umkm di desa.webp",
-      text: "Soto Sederhana",
+      img: "/Foto Produk/baru1/produk1.webp",
+      text: "Biru Bulan",
     },
     {
       id: 2,
-      img: "https://placehold.co/800x450/303030/white?text=Gambar+UMKM+2",
-      text: "Bakso Istimewa",
+      img: "/Foto Produk/baru1/produk2.webp",
+      text: "Logo",
     },
     {
       id: 3,
-      img: "https://placehold.co/800x450/5AC4B5/white?text=Gambar+UMKM+3",
-      text: "Kopi Kenangan",
+      img: "/Foto Produk/baru1/produk3.webp",
+      text: "Biru Bulan",
     },
     {
       id: 4,
-      img: "https://placehold.co/800x450/303030/white?text=Gambar+UMKM+4",
-      text: "Martabak Asin",
+      img: "/Foto Produk/baru1/produk4.webp",
+      text: "Motif Bunga 1",
     },
     {
       id: 5,
-      img: "https://placehold.co/800x450/5AC4B5/white?text=Gambar+UMKM+5",
-      text: "Nasi Goreng Gila",
+      img: "/Foto Produk/baru1/produk5.webp",
+      text: "Motif Bunga 2",
     },
   ];
   // ---------------------------------------------
@@ -77,7 +75,7 @@ export default function Carousel() {
       {/* Container relatif untuk tombol panah */}
       <div className="relative">
         {/* Viewport: Menyembunyikan slide yang 'overflow' */}
-        <div className="overflow-hidden rounded-lg h-52">
+        <div className="overflow-hidden rounded-lg h-52 shadow-2xl">
           {/* Track: Ini adalah 'flex' container
             Ini yang akan bergeser ke samping
           */}
@@ -92,8 +90,6 @@ export default function Carousel() {
                 // Setiap slide: lebar 100% dan tidak akan 'shrink'
                 className="relative h-full w-full flex-shrink-0"
               >
-                {/* --- PERBAIKAN --- */}
-                {/* Mengganti next/image dengan <img> standar */}
                 <img
                   src={slide.img}
                   alt={slide.text}
@@ -129,7 +125,7 @@ export default function Carousel() {
       </div>
 
       {/* Dots Indikator */}
-      <div className="flex justify-center gap-2 mt-4">
+      <div className="flex justify-center gap-2 mt-10" style={{marginTop: '24px'}}>
         {slides.map((_, index) => (
           <button
             key={index}
