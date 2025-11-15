@@ -1787,64 +1787,93 @@ body.drawer-open .appbar {
 .about-pill-grid {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
   margin-bottom: 24px;
 }
 
 .about-pill {
-  background: #e7e7ea;
-  border-radius: 20px;
-  padding: 18px;
+  background: #e4e4e7;
+  border-radius: 24px;
+  padding: 20px;
+  display: flex;
+  gap: 18px;
 }
 
-.about-pill h3 {
-  margin: 0 0 8px;
-  letter-spacing: 0.05em;
-  color: #4aa696;
+.about-pill-label {
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #1f332f;
+  font-size: 20px;
+  display: flex;
+  align-items: flex-start;
+  flex-shrink: 0;
+  min-width: 72px;
 }
 
-.about-pill p {
+.about-pill-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.about-pill-content p {
   margin: 0;
   color: #4b4b55;
   font-size: 14px;
+  line-height: 1.5;
 }
 
 .about-principles {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
 }
 
 .about-principle-card {
-  background: #eeeeef;
-  border-radius: 18px;
-  padding: 16px;
+  background: #ececee;
+  border-radius: 22px;
+  padding: 20px 16px;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: 12px;
-  align-items: flex-start;
 }
 
-.about-principle-card .icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: #d4d4d9;
-  color: #1f1f25;
-  font-weight: 700;
-  display: inline-flex;
+.about-principle-icon-wrapper {
+  width: 72px;
+  height: 72px;
+  border-radius: 22px;
+  background: #ffffff;
+  display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 10px 20px rgba(31, 33, 30, 0.08);
+}
+
+.about-principle-icon-wrapper.fallback {
+  background: #d6d6da;
+  color: #1f1f25;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.about-principle-icon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
 }
 
 .about-principle-card h3 {
-  margin: 0 0 4px;
-  font-size: 15px;
+  margin: 0;
+  font-size: 16px;
 }
 
 .about-principle-card p {
   margin: 0;
   font-size: 13px;
-  color: #5c5c63;
+  color: #5a5a62;
+  line-height: 1.5;
 }
 
 .about-stats {
@@ -1893,7 +1922,7 @@ body.drawer-open .appbar {
 
 .cta-outline,
 .cta-solid {
-  border-radius: 999px;
+  border-radius: 12px;
   padding: 10px 22px;
   font-weight: 600;
   border: 1.4px solid #1f4b3f;

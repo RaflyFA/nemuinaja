@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { useRouter } from "next/navigation"
 import PageLayout from "./page-layout"
 import Footer from "../footer"
@@ -8,12 +9,16 @@ const principles = [
   {
     title: "Asli lokal",
     description: "Kami bangga dengan produk dan karya asli daerah. Dari kita, untuk kita",
-    icon: "A",
+    iconPath: "/aslilokal.webp",
+    fallbackInitial: "A",
+    iconAlt: "Ikon lokasi untuk nilai Asli Lokal",
   },
   {
     title: "Komunitas",
     description: "Bukan sekadar direktori, tapi wadah untuk berbagi cerita antara pemilik usaha dan pelanggan",
-    icon: "K",
+    iconPath: "/community.webp",
+    fallbackInitial: "K",
+    iconAlt: "Ikon komunitas untuk nilai Komunitas",
   },
 ]
 
@@ -21,6 +26,23 @@ const stats = [
   { label: "UMKM terdaftar", value: "10+" },
   { label: "Pencarian bulan ini", value: "100+" },
   { label: "Kota", value: "1" },
+]
+
+const visionMission = [
+  {
+    label: "VISI",
+    descriptions: [
+      "Menjadi platform penghubung nomor satu yang mendigitalkan UMKM lokal agar berdaya saing dan mudah diakses oleh siapa saja.",
+    ],
+  },
+  {
+    label: "MISI",
+    descriptions: [
+      "Membangun peta digital yang paling ramah dan mudah digunakan untuk menemukan bisnis di sekitar kita.",
+      "Bukan hanya menampilkan alamat, tapi juga menyuarakan cerita unik dan perjuangan di balik setiap usaha.",
+      "Mengajak masyarakat untuk bangga dan lebih sering berbelanja di warung tetangga dan usaha teman sendiri.",
+    ],
+  },
 ]
 
 export default function TentangKamiPage() {
@@ -76,17 +98,18 @@ export default function TentangKamiPage() {
         </section>
 
         <section className="about-pill-grid">
-          <article className="about-pill">
-            <h3>VISI</h3>
-            <p>Menjadi platform penghubung nomor satu yang menjadikan UMKM lokal agar berdaya saing dan mudah diakses.</p>
-          </article>
-          <article className="about-pill">
-            <h3>MISI</h3>
-            <p>
-              Menjadi peta digital yang ramah dan mudah digunakan untuk menemukan bisnis di sekitar kita dan mengangkat
-              cerita dibalik usaha lokal.
-            </p>
-          </article>
+          {visionMission.map((item) => (
+            <article className="about-pill" key={item.label}>
+              <div className="about-pill-label" aria-hidden="true">
+                {item.label}
+              </div>
+              <div className="about-pill-content">
+                {item.descriptions.map((text, index) => (
+                  <p key={`${item.label}-${index}`}>{text}</p>
+                ))}
+              </div>
+            </article>
+          ))}
         </section>
 
         <section className="about-section">
@@ -94,9 +117,21 @@ export default function TentangKamiPage() {
           <div className="about-principles">
             {principles.map((principle) => (
               <article key={principle.title} className="about-principle-card">
-                <div className="icon" aria-hidden="true">
-                  {principle.icon}
-                </div>
+                {principle.iconPath ? (
+                  <div className="about-principle-icon-wrapper">
+                    <Image
+                      src={principle.iconPath}
+                      alt={principle.iconAlt}
+                      width={56}
+                      height={56}
+                      className="about-principle-icon"
+                    />
+                  </div>
+                ) : (
+                  <div className="about-principle-icon-wrapper fallback" aria-hidden="true">
+                    {principle.fallbackInitial}
+                  </div>
+                )}
                 <div>
                   <h3>{principle.title}</h3>
                   <p>{principle.description}</p>
