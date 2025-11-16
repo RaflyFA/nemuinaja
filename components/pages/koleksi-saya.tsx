@@ -91,7 +91,7 @@ export default function KoleksiSayaPage() {
           {collectionItems.map((item) => {
             const bookmarked = bookmarkedIds.includes(item.id)
             return (
-              <Link key={item.id} href={`/halamanUMKM?id=${item.id}`}>
+              <Link key={item.id} href={`/halamanUMKM/${item.id}`}>
                 <article className="collection-card">
                   <div className="collection-avatar" aria-hidden="true">
                     <span role="img" aria-hidden="true">

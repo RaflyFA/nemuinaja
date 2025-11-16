@@ -43,18 +43,20 @@ const heroImages = [
 ]
 
 export default function DirektoriPageContent() {
-  // generate a stable random rating per item on mount (4.5 - 5.0, one decimal)
-  const generateRandomRating = () => {
-    const val = 4.5 + Math.random() * 0.5
+  // deterministic rating generator (based on id) to avoid SSR/CSR mismatch
+  const deterministicRating = (id: number) => {
+    // produce a repeatable value between 4.5 and 5.0 with one decimal
+    const fraction = ((id * 37) % 51) / 100 // 0 .. 0.50
+    const val = 4.5 + fraction
     return Math.round(val * 10) / 10
   }
 
   const trendingWithRandom = useMemo(() => {
-    return trendingItems.map((item) => ({ ...item, rating: generateRandomRating() }))
+    return trendingItems.map((item) => ({ ...item, rating: deterministicRating(item.id) }))
   }, [])
 
   const specialWithRandom = useMemo(() => {
-    return specialItems.map((item) => ({ ...item, rating: generateRandomRating() }))
+    return specialItems.map((item) => ({ ...item, rating: deterministicRating(item.id) }))
   }, [])
   return (
     <>
@@ -79,7 +81,7 @@ export default function DirektoriPageContent() {
           
           <div className="directory-grid">
             {trendingWithRandom.map((item) => (
-              <Link key={item.id} href={`/halamanUMKM?id=${item.id}`}>
+              <Link key={item.id} href={`/halamanUMKM/${item.id}`}>
                 <article className="directory-card">
                   <div className="directory-card-media">
                     <img 
@@ -109,7 +111,7 @@ export default function DirektoriPageContent() {
           </div>
           <div className="directory-special-track">
             {specialWithRandom.map((item) => (
-              <Link key={item.id} href={`/halamanUMKM?id=${item.id}`}>
+              <Link key={item.id} href={`/halamanUMKM/${item.id}`}>
                 <article className="directory-feature-card">
                   <div className="directory-feature-media">
                     <img 
@@ -138,7 +140,7 @@ export default function DirektoriPageContent() {
           
         <section className="directory-section directory-stack">
           {specialWithRandom.map((item) => (
-            <Link key={`stack-${item.id}`} href={`/halamanUMKM?id=${item.id}`}>
+            <Link key={`stack-${item.id}`} href={`/halamanUMKM/${item.id}`}>
               <article className="directory-stack-card">
                 <div className="directory-stack-media">
                   <img 
