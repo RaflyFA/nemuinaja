@@ -1,5 +1,3 @@
-# nemuinaja — Direktori UMKM Lokal
-
 Sebuah web app yang menghubungkan warga dengan UMKM Tasikmalaya melalui peta digital interaktif, fitur koleksi, dan formulir pengajuan mitra sehingga cerita setiap usaha dapat dijangkau siapa pun.
 
 ## Tech Stack
