@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useSearchParams, Suspense } from "react"
+import React, {  Suspense } from "react"
 import Link from "next/link"
 import styles from "./page.module.css"
 import { Umkm } from "../../../lib/umkm-data"
@@ -11,8 +11,8 @@ type UmkmPageClientProps = {
 }
 
 function UmkmPageContent({ umkm, gallery }: UmkmPageClientProps) {
-  const searchParams = useSearchParams()
-  const selectedProductId = searchParams?.get("product")
+//   const searchParams = useSearchParams()
+//   const selectedProductId = searchParams?.get("product")
 
   return (
     <div className={styles.container}>
