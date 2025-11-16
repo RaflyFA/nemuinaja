@@ -93,7 +93,6 @@ export default function AjukanPage() {
         <PageLayout containerClassName="apply-container" mainClassName="apply-page" hideAppBar>
           <header className="apply-page-header">
             <img src="/logo-light.webp" alt="nemuinaja" width={84} height={84} />
-            <span>nemuinaja</span>
             <h1 className="pengajuan">
               Formulir Pengajuan UMKM 
             </h1>
@@ -425,10 +424,10 @@ function TermsModal({ terms, onClose }: { terms: string[]; onClose: () => void }
         <button className="apply-modal-close" onClick={onClose} aria-label="Tutup">
           &times;
         </button>
-        <header className="apply-modal-header">
-          <img src="/logo-light.webp" alt="nemuinaja" width={64} height={64} />
-          <h2>
-            Syarat & <span>Ketentuan</span>
+        <header className="apply-page-header">
+          <img src="/logo-light.webp" alt="nemuinaja" width={84} height={84} />
+          <h2 className="pengajuan">
+            Formulir Pengajuan UMKM 
           </h2>
         </header>
         <ol>

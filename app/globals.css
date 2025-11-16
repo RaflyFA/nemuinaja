@@ -1666,7 +1666,6 @@ body.drawer-open .appbar {
   font-size: 16px;
 }
 
-/* ===== CAROUSEL ===== */
 .carousel-section {
   padding: 32px 16px;
 }
@@ -1691,7 +1690,6 @@ body.drawer-open .appbar {
   padding: 16px;
   font-size: 13px;
   color: var(--text-light);
-  /* Added touch interaction support */
   touch-action: pan-y;
   user-select: none;
 }
@@ -1753,7 +1751,6 @@ body.drawer-open .appbar {
   outline: 2px solid var(--accent);
 }
 
-/* ===== CATEGORIES ===== */
 .categories-section {
   padding: 32px 16px;
 }
@@ -1784,7 +1781,6 @@ body.drawer-open .appbar {
 }
 
 .category-card {
-  /* Styled as proper card with better appearance */
   flex: 0 0 auto;
   width: 140px;
   background-color: white;
@@ -1809,7 +1805,6 @@ body.drawer-open .appbar {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
 }
 
-/* kartu di sebelah kanan kartu aktif */
 .category-card.active ~ .category-card {
   transform: scale(0.75) rotateY(-25deg) translateZ(-50px);
   opacity: 0.4;
@@ -1886,7 +1881,6 @@ body.drawer-open .appbar {
   outline: 2px solid var(--accent);
 }
 
-/* ===== DIRECTORY ===== */
 .directory-container {
   min-height: 100vh;
   background-color: #ffffff;
@@ -1973,7 +1967,7 @@ body.drawer-open .appbar {
   font-weight: 700;
   position: absolute;
   top: -10px;
-  right: 12px; /* move badge to right */
+  right: 12px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
@@ -1992,7 +1986,7 @@ body.drawer-open .appbar {
   display: flex;
   gap: 16px;
   overflow-x: auto;
-  padding-bottom: 20px; /* space for scrollbar strip */
+  padding-bottom: 20px;
   scroll-snap-type: x mandatory;
   position: relative;
 }
@@ -2081,7 +2075,6 @@ body.drawer-open .appbar {
   margin-top: 8px;
 }
 
-/* Dots-only carousel indicator (matches pasted image 2) */
 .directory-scrollbar .dot {
   width: 8px;
   height: 8px;
@@ -2147,9 +2140,8 @@ body.drawer-open .appbar {
   color: #5f5f65;
 }
 
-/* rating badge tweaks for visual parity */
 .directory-rating {
-  background-color: #25a891; /* slightly deeper teal */
+  background-color: #25a891;
   padding: 6px 10px;
   font-weight: 700;
   color: #fff;
@@ -2170,7 +2162,6 @@ body.drawer-open .appbar {
   }
 }
 
-/* ===== FAVORITES ===== */
 .favorites-container {
   min-height: 100vh;
   background-color: #f6f7fb;
@@ -2310,7 +2301,6 @@ body.drawer-open .appbar {
   color: #5f5f65;
 }
 
-/* ===== COLLECTIONS ===== */
 .collection-container {
   min-height: 100vh;
   background-color: #f6f7fb;
@@ -2457,7 +2447,6 @@ body.drawer-open .appbar {
   filter: invert(1);
 }
 
-/* ===== CTA DARK ===== */
 .cta-dark {
   background-color: var(--dark-surface);
   color: white;
@@ -2487,7 +2476,6 @@ body.drawer-open .appbar {
   font-style: italic;
 }
 
-/* ===== FAQ ===== */
 .faq-section {
   padding: 32px 16px;
 }
@@ -2563,6 +2551,14 @@ body.drawer-open .appbar {
   text-align: center;
 }
 
+.visi-misi { 
+  background: linear-gradient(90deg, #5AC4B5 0%, #303030 23%); 
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+}
+
 .footer {
   background-color: var(--dark-surface);
   color: white;
@@ -2599,7 +2595,6 @@ body.drawer-open .appbar {
 }
 
 .social-icons a {
-  /* Updated to rounded square frame instead of circle */
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2629,7 +2624,6 @@ body.drawer-open .appbar {
   margin: 16px 0;
 }
 
-/* Social icons: keep neutral visuals on hover (no color swap) */
 .social-icons a {
   display: inline-flex;
   align-items: center;
@@ -2645,7 +2639,6 @@ body.drawer-open .appbar {
 }
 
 .social-icons a:hover {
-  /* no visual change on hover for social icons */
   background-color: rgba(255, 255, 255, 0.1);
   color: white;
 }
@@ -2654,13 +2647,11 @@ body.drawer-open .appbar {
   outline: 2px solid white;
 }
 
-/* ensure any image icons don't change color on hover */
 .social-icons a img {
   transition: none;
   filter: none;
 }
 
-/* ===== RESPONSIVE ===== */
 @media (min-width: 391px) {
   .home-content {
     max-width: 390px;
@@ -2895,16 +2886,41 @@ body.drawer-open .appbar {
   border-radius: 12px;
   padding: 10px 22px;
   font-weight: 600;
-  border: 1.4px solid #1f4b3f;
-  color: #1f4b3f;
-  background: transparent;
+  font-size: 14px;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
 }
 
 .cta-solid {
-  background: #1f4b3f;
+  background-color: #5ac4b5;
   color: #ffffff;
+  border: 1.4px solid #5ac4b5;
 }
 
+.cta-solid:hover {
+  background-color: #ffffff;
+  color: #5ac4b5;
+  border-color: #5ac4b5;
+}
 
+.cta-outline {
+  background-color: transparent;
+  color: #5ac4b5;
+  border: 1.4px solid #5ac4b5;
+}
+
+.cta-outline:hover {
+  background-color: #5ac4b5;
+  color: #ffffff;
+  border-color: #5ac4b5;
+}
+
+.cta-outline:focus,
+.cta-solid:focus {
+  outline: 2px solid #5ac4b5;
+  outline-offset: 2px
+}
 

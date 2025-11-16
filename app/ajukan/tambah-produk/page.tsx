@@ -28,7 +28,6 @@ export default function TambahProdukPage() {
       <PageLayout containerClassName="apply-container" mainClassName="apply-page" hideAppBar>
         <header className="apply-page-header">
           <img src="/logo-light.webp" alt="nemuinaja" width={84} height={84} />
-          <span>nemuinaja</span>
           <h1 className="pengajuan">
             Yuk Tambahin Produk-mu
           </h1>
