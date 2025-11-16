@@ -7,6 +7,11 @@ export type Umkm = {
   description?: string
   sellerName?: string
   sellerCity?: string
+  avatar?: string
+  manager?: string
+  instagram?: string
+  whatsapp?: string
+  gallery?: Array<{ id: number; name: string; image?: string; hours?: string }>
 }
 
 export const UMKMS: Umkm[] = [
