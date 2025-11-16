@@ -1,4 +1,4 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -1217,13 +1217,26 @@ body.drawer-open .appbar {
   background: #e4e4e7;
 }
 
-.apply-select-arrow {
-  position: absolute;
-  right: 18px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 18px;
+.apply-select select {
+  width: 100%;
+  background: transparent;
+}
+
+.apply-select-button {
+  width: 100%;
+  border: none;
+  border-radius: 24px;
+  padding: 14px 18px;
+  background: #e4e4e7;
+  text-align: left;
+  font-size: 15px;
   color: #6e6e76;
+  cursor: pointer;
+}
+
+.apply-select-button.filled {
+  color: #1f1f24;
+  background: #dedeef;
 }
 
 .apply-checkbox {
@@ -1380,6 +1393,65 @@ body.drawer-open .appbar {
 
 .apply-modal-header span {
   color: #2f8f80;
+}
+
+.apply-schedule-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.apply-schedule-row {
+  display: grid;
+  grid-template-columns: auto 1fr 90px auto 90px;
+  align-items: center;
+  gap: 10px;
+}
+
+.apply-schedule-check {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #2f8f80;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.apply-schedule-check span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #2f8f80;
+  display: block;
+}
+
+.apply-schedule-check.checked {
+  background: rgba(47, 143, 128, 0.15);
+}
+
+.apply-schedule-day {
+  font-size: 14px;
+}
+
+.apply-schedule-row input[type="time"] {
+  border: none;
+  border-radius: 16px;
+  padding: 8px 10px;
+  background: #f0f0f2;
+  color: #1f1f24;
+}
+
+.apply-schedule-row input[type="time"]:disabled {
+  opacity: 0.4;
+}
+
+.apply-schedule-sep {
+  text-align: center;
+  color: #6e6e76;
 }
 /* ===== SEARCH DRAWER ===== */
 .search-container {
@@ -2469,6 +2541,13 @@ body.drawer-open .appbar {
   padding: 12px 0;
 }
 
+.pengajuan {
+  background: linear-gradient(90deg, #5AC4B5 0%, #303030 25%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+}
 
 .footer {
   background-color: var(--dark-surface);
@@ -2812,4 +2891,6 @@ body.drawer-open .appbar {
   background: #1f4b3f;
   color: #ffffff;
 }
+
+
 

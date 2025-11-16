@@ -9,7 +9,6 @@ import { useAuth } from "../../lib/auth-context"
 const OWNER_EMAILS = new Set(["payunggeulismandiri@gmail.com"])
 
 type AuthMode = "login" | "register" | "username" | "forgot"
-type AccountType = "user" | "owner"
 
 export default function ProfilPage() {
   const { isAuthenticated, user } = useAuth()
@@ -34,7 +33,6 @@ export default function ProfilPage() {
 
 function ProfileAuthScreen() {
   const [mode, setMode] = useState<AuthMode>("login")
-  const [accountType, setAccountType] = useState<AccountType>("user")
 
   return (
     <section className="profile-auth">
@@ -52,29 +50,10 @@ function ProfileAuthScreen() {
         </p>
       </div>
 
-      {mode !== "login" && (
-        <div className="profile-auth-toggle">
-          <button
-            type="button"
-            className={accountType === "user" ? "active" : ""}
-            onClick={() => setAccountType("user")}
-          >
-            Pengguna
-          </button>
-          <button
-            type="button"
-            className={accountType === "owner" ? "active" : ""}
-            onClick={() => setAccountType("owner")}
-          >
-            Pemilik UMKM
-          </button>
-        </div>
-      )}
-
       {mode === "login" && <LoginForm onSwitchMode={setMode} />}
       {mode === "forgot" && <ForgotPasswordForm onSwitchMode={setMode} />}
-      {mode === "register" && <RegisterForm accountType={accountType} onSwitchMode={setMode} />}
-      {mode === "username" && <UsernameStep accountType={accountType} />}
+      {mode === "register" && <RegisterForm onSwitchMode={setMode} />}
+      {mode === "username" && <UsernameStep />}
     </section>
   )
 }
@@ -167,13 +146,7 @@ function ForgotPasswordForm({ onSwitchMode }: { onSwitchMode: (mode: AuthMode) =
     </form>
   )
 }
-function RegisterForm({
-  accountType,
-  onSwitchMode,
-}: {
-  accountType: AccountType
-  onSwitchMode: (mode: AuthMode) => void
-}) {
+function RegisterForm({ onSwitchMode }: { onSwitchMode: (mode: AuthMode) => void }) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [confirm, setConfirm] = useState("")
@@ -240,7 +213,7 @@ function RegisterForm({
   )
 }
 
-function UsernameStep({ accountType }: { accountType: AccountType }) {
+function UsernameStep() {
   const router = useRouter()
   const { login } = useAuth()
   const [username, setUsername] = useState("")
@@ -249,8 +222,8 @@ function UsernameStep({ accountType }: { accountType: AccountType }) {
     event.preventDefault()
     if (!username.trim()) return
     login({
-      hasUmkm: accountType === "owner",
-      name: accountType === "owner" ? "Payung Geulis Karya Utama" : username.trim(),
+      hasUmkm: false,
+      name: username.trim(),
       username: username.trim().toLowerCase(),
     })
     router.push("/profil")
@@ -337,7 +310,7 @@ function UserProfileView() {
       </div>
       <div className="profile-actions">
         <button onClick={() => router.push("/profil/edit")}>Edit Profil</button>
-        <button onClick={() => router.push("/ajukan")}>Ajukan UMKM</button>
+        <button onClick={() => router.push("/ajukan/tambah-produk")}>Ajukan UMKM</button>
       </div>
       <p className="profile-empty-bio">Tidak ada bio</p>
       <hr />
@@ -378,7 +351,7 @@ function UmkmProfileView() {
       </div>
       <div className="profile-actions">
         <button onClick={() => router.push("/profil/edit")}>Edit Profil</button>
-        <button onClick={() => router.push("/koleksi")}>Tambahkan Produk</button>
+        <button onClick={() => router.push("/ajukan/tambah-produk")}>Tambahkan Produk</button>
       </div>
       <p className="profile-description">{user.umkmDescription ?? user.bio}</p>
       <div className="profile-divider" />

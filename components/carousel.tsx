@@ -2,14 +2,11 @@
 
 import type React from "react";
 import { useState, useRef } from "react";
-// import Image from "next/image"; // Dihapus untuk memperbaiki error kompilasi
-import { ChevronLeft, ChevronRight } from "lucide-react"; // Kita butuh ikon panah
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function Carousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const touchStartRef = useRef<number | null>(null);
-
-  // --- DATA SLIDE (Ganti dengan gambar Anda) ---
   const slides = [
     {
       id: 1,
@@ -51,7 +48,6 @@ export default function Carousel() {
     setCurrentSlide(index);
   };
 
-  // --- Logika Swipe (Geser) ---
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartRef.current = e.targetTouches[0].clientX;
   };
@@ -62,50 +58,38 @@ export default function Carousel() {
     touchStartRef.current = null;
     if (startX == null) return;
     const distance = startX - endX;
-    const threshold = 50; // Jarak minimal geser
+    const threshold = 50;
     if (distance > threshold) nextSlide();
     else if (distance < -threshold) prevSlide();
   };
 
   return (
-    // Section utama, padding vertikal, dan batasi lebar max
     <section
       className="py-12 w-full max-w-sm mx-auto"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Container relatif untuk tombol panah */}
       <div className="relative">
-        {/* Viewport: Menyembunyikan slide yang 'overflow' */}
         <div className="overflow-hidden rounded-lg h-52">
-          {/* Track: Ini adalah 'flex' container
-            Ini yang akan bergeser ke samping
-          */}
           <div
             className="flex h-full transition-transform duration-500 ease-in-out"
             style={{ transform: `translateX(-${currentSlide * 100}%)` }}
           >
-            {/* Render semua slide/gambar */}
             {slides.map((slide) => (
               <div
                 key={slide.id}
-                // Setiap slide: lebar 100% dan tidak akan 'shrink'
                 className="relative h-full w-full flex-shrink-0"
               >
-                {/* --- PERBAIKAN --- */}
-                {/* Mengganti next/image dengan <img> standar */}
                 <img
                   src={slide.img}
                   alt={slide.text}
-                  className="w-full h-full object-cover" // Menggunakan Tailwind untuk 'fill' dan 'objectFit'
+                  className="w-full h-full object-cover"
                   loading="lazy"
                 />
               </div>
             ))}
           </div>
         </div>
-
-        {/* Tombol Kiri */}
         <button
           className="absolute top-1/2 left-2 -translate-y-1/2 z-10
                      w-10 h-10 rounded-full bg-gray-800 bg-opacity-70 text-white 
@@ -115,8 +99,6 @@ export default function Carousel() {
         >
           <ChevronLeft size={24} />
         </button>
-
-        {/* Tombol Kanan */}
         <button
           className="absolute top-1/2 right-2 -translate-y-1/2 z-10
                      w-10 h-10 rounded-full bg-gray-800 bg-opacity-70 text-white 
@@ -127,8 +109,6 @@ export default function Carousel() {
           <ChevronRight size={24} />
         </button>
       </div>
-
-      {/* Dots Indikator */}
       <div className="flex justify-center gap-2 mt-4">
         {slides.map((_, index) => (
           <button
@@ -136,8 +116,8 @@ export default function Carousel() {
             className={`h-2 rounded-full transition-all duration-300
                        ${
                          index === currentSlide
-                           ? "w-6 bg-gray-800" // Dot aktif
-                           : "w-2 bg-gray-300" // Dot non-aktif
+                           ? "w-6 bg-gray-800"
+                           : "w-2 bg-gray-300"
                        }`}
             onClick={() => goToSlide(index)}
             aria-label={`Go to slide ${index + 1}`}

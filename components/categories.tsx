@@ -5,30 +5,21 @@ import React, { useState, useRef, useEffect } from "react"
 type Item = { id: number; title: string; image: string }
 
 export default function Categories() {
-  // Only 3 images as requested (replace images/text with your real data as needed)
   const items: Item[] = [
     { id: 1, title: "Palm Trees", image: "https://picsum.photos/seed/1/420/320" },
     { id: 2, title: "Bridge", image: "https://picsum.photos/seed/2/420/320" },
     { id: 3, title: "Waterfall", image: "https://picsum.photos/seed/4/420/320" }
   ]
-
-  // active index points to the center visible item
   const [active, setActive] = useState<number>(0)
   const containerRef = useRef<HTMLDivElement | null>(null)
-
-  // sizes (tweak these to match visual design)
-  const CARD = 220 // full card width in px (increased)
-  const CARD_HEIGHT = 200 // card height in px
-  const SIDE_VISIBLE_PCT = 0.32 // ~30% of card visible on each side
+  const CARD = 220 
+  const CARD_HEIGHT = 200 
+  const SIDE_VISIBLE_PCT = 0.32 
   const SIDE_VISIBLE = Math.round(CARD * SIDE_VISIBLE_PCT)
   const GAP = 14
   const VIEWPORT_WIDTH = CARD + SIDE_VISIBLE * 2
-
-  // move to next / prev: keep virtual index unbounded so motion is continuous
   const next = () => setActive((a) => a + 1)
   const prev = () => setActive((a) => a - 1)
-
-  // drag handling for manual swipe
   useEffect(() => {
     const el = containerRef.current
     if (!el) return
@@ -63,34 +54,25 @@ export default function Categories() {
       window.removeEventListener('pointerup', onUp)
     }
   }, [])
-
-  // compute translation and rotation for item index to create curved, tilted look
   function transformForIndex(index: number) {
     const offsetIndex = index - active
-    // center position is 0, neighboring positions are +- spacing
     const spacing = CARD + GAP
     const x = offsetIndex * spacing
-    // vertical offset: neighbors come from slightly above
     const absIdx = Math.abs(offsetIndex)
     const y = offsetIndex === 0 ? 0 : -20 * (1 / Math.max(1, absIdx))
-    // rotation: tilt inward/outward — inverted direction per request
-    const baseRotate = 14 // degrees for immediate neighbors (bigger tilt)
+    const baseRotate = 14 
     const rotate = offsetIndex === 0 ? 0 : (offsetIndex > 0 ? -baseRotate : baseRotate) * (1 / Math.max(1, absIdx))
     const scale = offsetIndex === 0 ? 1 : 0.92
     const zIndex = 200 - Math.abs(offsetIndex)
     return { transform: `translateX(${x}px) translateY(${y}px) rotate(${rotate}deg) scale(${scale})`, zIndex }
   }
-
-  // create a window of indices around the active one to simulate infinite loop
-  const WINDOW = 7 // number of DOM cards to generate (should be odd)
+  const WINDOW = 7
   const MID = Math.floor(WINDOW / 2)
   function windowIndices() {
     const res: number[] = []
     for (let i = active - MID; i <= active + MID; i++) res.push(i)
     return res
   }
-
-  // render
   return (
     <section style={{ textAlign: 'center', padding: '32px 0' }}>
       <h2 style={{ margin: 0, fontSize: 22, fontWeight: 700 }}>
@@ -104,7 +86,6 @@ export default function Categories() {
       <div style={{ height: 20 }} />
 
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
-        {/* viewport clip: center card visible, side cards partially (~30%) */}
         <div style={{ width: VIEWPORT_WIDTH, overflow: 'hidden', display: 'flex', justifyContent: 'center' }}>
           <div
             ref={containerRef}
@@ -115,8 +96,6 @@ export default function Categories() {
               display: 'block'
             }}
           >
-            {/* items positioned absolutely centered */}
-            {/* items positioned absolutely centered. We render a window of indices mapped to circular items */}
             <div style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%,-50%)', height: '100%', width: '100%' }}>
               {windowIndices().map((idx) => {
                   const len = items.length
@@ -129,7 +108,6 @@ export default function Categories() {
                     key={`${it.id}-${idx}`}
                       role="button"
                       onClick={() => {
-                        // when clicking a rendered window item, jump the virtual index
                         const wrappedActive = ((active % len) + len) % len
                         let diff = wrappedIndex - wrappedActive
                         if (diff > len / 2) diff -= len
@@ -170,8 +148,6 @@ export default function Categories() {
       </div>
 
       <div style={{ height: 18 }} />
-
-      {/* arrows + dots placed below, arrows next to dots */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
         <button
           aria-label="prev"
@@ -190,7 +166,6 @@ export default function Categories() {
                 <div
                   key={idx}
                   onClick={() => {
-                    // compute shortest diff and move virtual index accordingly
                     let diff = idx - wrappedActive
                     if (diff > len / 2) diff -= len
                     if (diff < -len / 2) diff += len

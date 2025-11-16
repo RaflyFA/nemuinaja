@@ -68,8 +68,6 @@ export default function Directory() {
 
     return () => document.body.classList.remove("drawer-closing")
   }, [menuVisible, menuOpen, searchVisible, searchOpen])
-
-  // sync active dot with special track scroll position
   useEffect(() => {
     const el = specialTrackRef.current
     if (!el) return
@@ -94,8 +92,6 @@ export default function Directory() {
       window.removeEventListener("resize", update)
     }
   }, [])
-
-  // allow clicking dots to navigate to a specific item
   const goToIndex = (index: number) => {
     const el = specialTrackRef.current
     if (!el) return

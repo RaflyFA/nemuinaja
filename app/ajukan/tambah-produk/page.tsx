@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState } from "react"
 import PageLayout from "@/components/pages/page-layout"
@@ -29,8 +29,8 @@ export default function TambahProdukPage() {
         <header className="apply-page-header">
           <img src="/logo-light.webp" alt="nemuinaja" width={84} height={84} />
           <span>nemuinaja</span>
-          <h1>
-            Yuk <span>Tambahin Produk-mu</span>
+          <h1 className="pengajuan">
+            Yuk Tambahin Produk-mu
           </h1>
         </header>
 
@@ -56,7 +56,6 @@ export default function TambahProdukPage() {
             <button type="button" className="apply-upload-btn">
               Unggah Gambar
             </button>
-            <p className="apply-upload-types">png . jpeg . jpg . webp</p>
           </div>
           <InputField
             label="Deskripsi produk"
@@ -118,7 +117,6 @@ function SelectField({ label, placeholder, options, value, onChange }: SelectFie
             </option>
           ))}
         </select>
-        <span className="apply-select-arrow">⌄</span>
       </div>
     </label>
   )

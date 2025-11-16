@@ -1,12 +1,18 @@
-"use client"
+﻿"use client"
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import PageLayout from "@/components/pages/page-layout"
 import Footer from "@/components/footer"
+import { useAuth } from "@/lib/auth-context"
 
 const businessFields = ["Kuliner", "Fashion", "Kerajinan", "Jasa Kreatif", "Pertanian", "Lainnya"]
-const schedules = ["Setiap Hari", "Senin - Jumat", "Weekdays", "Weekend", "By Appointment"]
+const defaultSchedule = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"].map((day) => ({
+  day,
+  checked: false,
+  start: "08:00",
+  end: "17:00",
+}))
 const termsList = [
   "Adalah Warga Negara Indonesia yang memiliki kartu identitas resmi yang diakui oleh Republik Indonesia.",
   "Memiliki produk yang tidak bertentangan dengan ketentuan dan aturan hukum di Indonesia.",
@@ -18,7 +24,9 @@ const termsList = [
 
 export default function AjukanPage() {
   const router = useRouter()
+  const { isAuthenticated, isReady, user } = useAuth()
   const [showTermsModal, setShowTermsModal] = useState(false)
+  const [showScheduleModal, setShowScheduleModal] = useState(false)
   const [ownerForm, setOwnerForm] = useState({
     nama: "",
     nik: "",
@@ -31,28 +39,50 @@ export default function AjukanPage() {
     jadwal: "",
     agree: false,
   })
+  const [scheduleDays, setScheduleDays] = useState(defaultSchedule)
+
+  const overlayOpen = showTermsModal || showScheduleModal
 
   useEffect(() => {
-    document.body.style.overflow = showTermsModal ? "hidden" : "auto"
+    document.body.style.overflow = overlayOpen ? "hidden" : "auto"
     return () => {
       document.body.style.overflow = "auto"
     }
-  }, [showTermsModal])
+  }, [overlayOpen])
+
+  useEffect(() => {
+    if (!isReady) return
+    if (!isAuthenticated) {
+      router.replace("/profil")
+      return
+    }
+    if (user?.hasUmkm) {
+      router.replace("/ajukan/tambah-produk")
+    }
+  }, [isAuthenticated, isReady, user, router])
 
   const handleOwnerSubmit = (event: React.FormEvent) => {
     event.preventDefault()
     router.push("/ajukan/tambah-produk")
   }
 
+  if (!isReady) {
+    return null
+  }
+
+  if (!isAuthenticated || user?.hasUmkm) {
+    return null
+  }
+
   return (
     <>
-      <div className={showTermsModal ? "apply-blur" : undefined}>
+      <div className={overlayOpen ? "apply-blur" : undefined}>
         <PageLayout containerClassName="apply-container" mainClassName="apply-page" hideAppBar>
           <header className="apply-page-header">
             <img src="/logo-light.webp" alt="nemuinaja" width={84} height={84} />
             <span>nemuinaja</span>
-            <h1>
-              Formulir Pengajuan <span>UMKM</span>
+            <h1 className="pengajuan">
+              Formulir Pengajuan UMKM 
             </h1>
           </header>
 
@@ -108,13 +138,16 @@ export default function AjukanPage() {
               value={ownerForm.nib}
               onChange={(value) => setOwnerForm((prev) => ({ ...prev, nib: value }))}
             />
-            <SelectField
-              label="Jadwal Operasional"
-              placeholder="Pilih jadwal buka toko Anda"
-              options={schedules}
-              value={ownerForm.jadwal}
-              onChange={(value) => setOwnerForm((prev) => ({ ...prev, jadwal: value }))}
-            />
+            <div className="apply-field">
+              <span>Jadwal Operasional</span>
+              <button
+                type="button"
+                className={`apply-select-button ${ownerForm.jadwal ? "filled" : ""}`}
+                onClick={() => setShowScheduleModal(true)}
+              >
+                {ownerForm.jadwal || "Pilih jadwal buka toko Anda"}
+              </button>
+            </div>
             <label className="apply-checkbox">
               <input
                 type="checkbox"
@@ -135,6 +168,22 @@ export default function AjukanPage() {
           </form>
         </PageLayout>
       </div>
+
+      {showScheduleModal ? (
+        <ScheduleModal
+          days={scheduleDays}
+          onClose={() => setShowScheduleModal(false)}
+          onSave={(days) => {
+            setScheduleDays(days)
+            const summary = days
+              .filter((day) => day.checked)
+              .map((day) => `${day.day} ${day.start}-${day.end}`)
+              .join(", ")
+            setOwnerForm((prev) => ({ ...prev, jadwal: summary || "" }))
+            setShowScheduleModal(false)
+          }}
+        />
+      ) : null}
 
       {showTermsModal ? <TermsModal terms={termsList} onClose={() => setShowTermsModal(false)} /> : null}
       <Footer />
@@ -185,9 +234,86 @@ function SelectField({ label, placeholder, options, value, onChange }: SelectFie
             </option>
           ))}
         </select>
-        <span className="apply-select-arrow">v</span>
       </div>
     </label>
+  )
+}
+
+type ScheduleDay = {
+  day: string
+  checked: boolean
+  start: string
+  end: string
+}
+
+function ScheduleModal({
+  days,
+  onClose,
+  onSave,
+}: {
+  days: ScheduleDay[]
+  onClose: () => void
+  onSave: (days: ScheduleDay[]) => void
+}) {
+  const [draft, setDraft] = useState(days)
+
+  const toggleDay = (index: number) => {
+    setDraft((prev) =>
+      prev.map((day, idx) => (idx === index ? { ...day, checked: !day.checked } : day)),
+    )
+  }
+
+  const updateTime = (index: number, field: "start" | "end", value: string) => {
+    setDraft((prev) =>
+      prev.map((day, idx) => (idx === index ? { ...day, [field]: value } : day)),
+    )
+  }
+
+  return (
+    <div className="apply-modal-backdrop">
+      <div className="apply-modal apply-terms-modal">
+        <button className="apply-modal-close" onClick={onClose} aria-label="Tutup">
+          &times;
+        </button>
+        <header className="apply-page-header">
+          <img src="/logo-light.webp" alt="nemuinaja" width={84} height={84} />
+          <span>nemuinaja</span>
+          <h2 className="pengajuan">
+            Atur Jadwal Operasional Kamu
+          </h2>
+        </header>
+        <div className="apply-schedule-list">
+          {draft.map((day, index) => (
+            <div key={day.day} className="apply-schedule-row">
+              <button
+                type="button"
+                className={`apply-schedule-check ${day.checked ? "checked" : ""}`}
+                onClick={() => toggleDay(index)}
+              >
+                {day.checked && <span />}
+              </button>
+              <span className="apply-schedule-day">{day.day}</span>
+              <input
+                type="time"
+                value={day.start}
+                disabled={!day.checked}
+                onChange={(event) => updateTime(index, "start", event.target.value)}
+              />
+              <span className="apply-schedule-sep">-</span>
+              <input
+                type="time"
+                value={day.end}
+                disabled={!day.checked}
+                onChange={(event) => updateTime(index, "end", event.target.value)}
+              />
+            </div>
+          ))}
+        </div>
+        <button className="apply-submit" type="button" onClick={() => onSave(draft)}>
+          Simpan jadwal
+        </button>
+      </div>
+    </div>
   )
 }
 
@@ -198,11 +324,12 @@ function TermsModal({ terms, onClose }: { terms: string[]; onClose: () => void }
         <button className="apply-modal-close" onClick={onClose} aria-label="Tutup">
           &times;
         </button>
-        <header className="apply-modal-header">
-          <img src="/logo-light.webp" alt="nemuinaja" width={64} height={64} />
-          <h2>
-            Syarat & <span>Ketentuan</span>
-          </h2>
+        <header className="apply-page-header">
+          <img src="/logo-light.webp" alt="nemuinaja" width={84} height={84} />
+          <span>nemuinaja</span>
+          <h1 className="pengajuan">
+            Yuk Tambahin Produk-mu
+          </h1>
         </header>
         <ol>
           {terms.map((term, index) => (
@@ -213,3 +340,6 @@ function TermsModal({ terms, onClose }: { terms: string[]; onClose: () => void }
     </div>
   )
 }
+
+
+
