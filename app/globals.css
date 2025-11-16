@@ -82,7 +82,6 @@
 }
 
 @theme inline {
-  /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -160,15 +159,16 @@ body.drawer-open {
   width: 100%;
   min-height: 100vh;
   margin: 0 auto;
+  align-items: center;
 }
 
 .home-content {
   flex: 1;
-  max-width: 390px;
   width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
-  padding-top: 56px;
-  padding-bottom: 32px;
+  padding: 56px 16px 64px;
+  box-sizing: border-box;
   transition: filter 0.4s ease-out;
 }
 
@@ -177,7 +177,35 @@ body.drawer-open {
   pointer-events: none;
 }
 
-/* ===== APPBAR ===== */
+@media (min-width: 768px) {
+  .home-content {
+    padding: 80px 32px 80px;
+  }
+
+  .hero {
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .section-title {
+    text-align: left;
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-content {
+    padding: 96px 48px 96px;
+  }
+
+  .hero-title {
+    font-size: 40px;
+  }
+
+  .hero-subtitle {
+    font-size: 16px;
+  }
+}
+
 .appbar {
   position: fixed;
   top: 0;
@@ -271,7 +299,6 @@ body.drawer-open .appbar {
   outline-offset: 2px;
 }
 
-/* ===== DRAWER ===== */
 .drawer-overlay {
   position: fixed;
   top: 0;
@@ -301,7 +328,7 @@ body.drawer-open .appbar {
 .drawer-menu,
 .drawer-search {
   position: fixed;
-  top: 0; /* overlap the navbar */
+  top: 0;
   left: 0;
   right: 0;
   background-color: var(--dark-surface);
@@ -317,8 +344,6 @@ body.drawer-open .appbar {
 
 .drawer-menu.closing,
 .drawer-search.closing {
-  /* start sliding up immediately and take slightly longer for a smoother feel
-     use a non-overshooting easing (no bounce) */
   animation: slideUpDrawer 0.52s cubic-bezier(0.22, 0, 0, 1) forwards;
   animation-delay: 0s;
 }
@@ -337,7 +362,6 @@ body.drawer-open .appbar {
 @keyframes slideDownDrawer {
   from {
     transform: translateY(-100%);
-    /* start semi-transparent so it fades in to full */
     opacity: 0.48;
   }
   to {
@@ -373,19 +397,16 @@ body.drawer-open .appbar {
   opacity: 0.7;
 }
 
-/* inner content fade/slide when closing: align durations with drawer slide so content remains visible while the drawer moves */
 .drawer-inner {
   transition: transform 0.52s cubic-bezier(0.22, 0, 0, 1),
     opacity 0.52s cubic-bezier(0.22, 0, 0, 1);
 }
 
-/* when closing, slightly lift and fade the inner content together with the drawer slide */
 .drawer-inner.content-closing {
   opacity: 0;
   transform: translateY(-12px);
 }
 
-/* ensure child also responds if parent gets closing class (keeps visual cohesion) */
 .drawer-menu.closing .drawer-inner,
 .drawer-search.closing .drawer-inner {
   opacity: 0;
@@ -678,7 +699,6 @@ body.drawer-open .appbar {
   font-size: 13px;
 }
 
-/* ===== PROFILE & AUTH ===== */
 .profile-container {
   min-height: 100vh;
   background: #f5f5f7;
@@ -1477,7 +1497,6 @@ body.drawer-open .appbar {
   text-align: center;
   color: #6e6e76;
 }
-/* ===== SEARCH DRAWER ===== */
 .search-container {
   margin-top: 40px;
 }
@@ -1502,7 +1521,6 @@ body.drawer-open .appbar {
   flex-shrink: 0;
 }
 
-/* search title and inline input both in the header */
 .search-title {
   font-size: 20px;
   margin: 0;
@@ -1594,10 +1612,13 @@ body.drawer-open .appbar {
   outline-offset: 2px;
 }
 
-/* ===== HERO ===== */
 .hero {
-  padding: 40px 16px 32px;
+  padding: 48px 0 32px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
 }
 
 .hero-title {
@@ -1679,7 +1700,7 @@ body.drawer-open .appbar {
 }
 
 .carousel-section {
-  padding: 32px 16px;
+  padding: 32px 0;
 }
 
 .carousel-container {
@@ -1764,7 +1785,7 @@ body.drawer-open .appbar {
 }
 
 .categories-section {
-  padding: 32px 16px;
+  padding: 32px 0;
 }
 
 .section-title {
@@ -1953,15 +1974,15 @@ body.drawer-open .appbar {
   padding: 10px 10px 14px;
   position: relative;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  overflow: visible; /* allow rating badge to overlap outside media area */
+  overflow: visible;
 }
 
 .directory-card-media {
   height: 100px;
-  border-radius: 12px; /* match card rounding */
+  border-radius: 12px;
   background: linear-gradient(180deg, #e9e9ec, #e0e0e6);
   margin-bottom: 10px;
-  overflow: hidden; /* clip image to rounded corners */
+  overflow: hidden;
 }
 
 .directory-card-media img {
@@ -1994,8 +2015,8 @@ body.drawer-open .appbar {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 8px; /* smaller overall */
-  padding: 4px 7px; /* tighter padding */
+  font-size: 8px;
+  padding: 4px 7px;
   border-radius: 10px;
   background-color: #25a891;
   color: white;
@@ -2070,7 +2091,7 @@ body.drawer-open .appbar {
 
 .directory-feature-body .directory-rating {
   position: absolute;
-  top: -23px; /* slightly higher for larger feature image */
+  top: -23px;
   right: 12px;
   padding: 4px 7px;
   border-radius: 10px;
@@ -2155,7 +2176,7 @@ body.drawer-open .appbar {
 
 .directory-stack-body .directory-rating {
   position: absolute;
-  top: -14px; /* slightly higher to match feature visuals */
+  top: -14px;
   right: 12px;
   padding: 4px 7px;
   border-radius: 10px;
@@ -2603,12 +2624,16 @@ body.drawer-open .appbar {
 
 .footer-content {
   max-width: 940px;
-  margin: 0;
+  width: 100%;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 8px;
+  padding: 0 16px;
+  box-sizing: border-box;
+  flex-wrap: wrap;
 }
 
 .follow-block {
