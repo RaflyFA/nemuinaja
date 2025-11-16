@@ -147,7 +147,6 @@ export default function Categories() {
                           objectPosition: 'center'
                         }}
                       />
-                      {/* Rating Badge */}
                       <div style={{
                         position: 'absolute',
                         bottom: -14,
