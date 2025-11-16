@@ -272,7 +272,22 @@ function ProfileHeader({ title }: { title: string }) {
   return (
     <header className="profile-header">
       <button className="profile-back" onClick={() => router.back()} aria-label="Kembali">
-        ←
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            d="M15 18L9 12L15 6"
+            stroke="#FAFAFA"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
       </button>
       <h1>{title}</h1>
     </header>
