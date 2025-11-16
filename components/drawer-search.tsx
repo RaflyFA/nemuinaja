@@ -17,16 +17,13 @@ export default function DrawerSearch({ onRequestClose, onCloseComplete }: Drawer
 
   const handleClose = () => {
     onRequestClose()
-    // start both content fade and drawer closing together for cohesion
     setIsContentClosing(true)
     setIsClosing(true)
-    // wait for CSS animation (matching globals.css ~520ms) before unmount
     setTimeout(() => onCloseComplete(), 560)
   }
 
   useEffect(() => {
     if (showInput) {
-      // small delay to ensure input is mounted and visible before focus
       const t = setTimeout(() => inputRef.current?.focus(), 80)
       return () => clearTimeout(t)
     }

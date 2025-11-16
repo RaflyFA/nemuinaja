@@ -709,14 +709,26 @@ body.drawer-open .appbar {
   font-weight: 600;
 }
 
+.profile-back-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
 .profile-back {
+  align-self: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
   border: none;
-  background: #ededf0;
-  width: 36px;
-  height: 36px;
-  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
   font-size: 18px;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.18);
 }
 
 .profile-hero {

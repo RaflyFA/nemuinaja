@@ -427,7 +427,7 @@ function TermsModal({ terms, onClose }: { terms: string[]; onClose: () => void }
         <header className="apply-page-header">
           <img src="/logo-light.webp" alt="nemuinaja" width={84} height={84} />
           <h2 className="pengajuan">
-            Formulir Pengajuan UMKM 
+            Formulir Pengajuan UMKM
           </h2>
         </header>
         <ol>

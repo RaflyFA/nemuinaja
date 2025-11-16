@@ -48,7 +48,22 @@ export default function EditProfilePage() {
         <div className="profile-card">
           <header className="profile-header">
             <button className="profile-back" onClick={() => router.back()} aria-label="Kembali">
-              ←
+              <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+              >
+              <path
+                d="M15 18L9 12L15 6"
+                stroke="#FAFAFA"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
             </button>
             <h1>Edit profil</h1>
           </header>
@@ -56,7 +71,6 @@ export default function EditProfilePage() {
             <span>👤</span>
             <button type="button">Ubah foto</button>
           </div>
-
           <form className="profile-edit-form" onSubmit={handleSubmit}>
             <label className="profile-edit-field">
               <span>Nama</span>
