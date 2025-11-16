@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
@@ -27,6 +27,7 @@ export default function AjukanPage() {
   const { isAuthenticated, isReady, user } = useAuth()
   const [showTermsModal, setShowTermsModal] = useState(false)
   const [showScheduleModal, setShowScheduleModal] = useState(false)
+  const [scheduleError, setScheduleError] = useState(false)
   const [ownerForm, setOwnerForm] = useState({
     nama: "",
     nik: "",
@@ -40,6 +41,7 @@ export default function AjukanPage() {
     agree: false,
   })
   const [scheduleDays, setScheduleDays] = useState(defaultSchedule)
+  const [showFieldErrors, setShowFieldErrors] = useState(false)
 
   const overlayOpen = showTermsModal || showScheduleModal
 
@@ -61,8 +63,19 @@ export default function AjukanPage() {
     }
   }, [isAuthenticated, isReady, user, router])
 
-  const handleOwnerSubmit = (event: React.FormEvent) => {
+  const handleOwnerSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    setShowFieldErrors(true)
+    const form = event.currentTarget
+    if (!ownerForm.jadwal) {
+      setScheduleError(true)
+      return
+    }
+    if (!form.checkValidity()) {
+      form.reportValidity()
+      return
+    }
+    setShowFieldErrors(false)
     router.push("/ajukan/tambah-produk")
   }
 
@@ -92,18 +105,26 @@ export default function AjukanPage() {
               placeholder="Pastikan penulisan sesuai KTP"
               value={ownerForm.nama}
               onChange={(value) => setOwnerForm((prev) => ({ ...prev, nama: value }))}
+              showErrorHint={showFieldErrors}
             />
             <InputField
               label="NIK"
               placeholder="Masukkan nomor NIK Anda"
               value={ownerForm.nik}
               onChange={(value) => setOwnerForm((prev) => ({ ...prev, nik: value }))}
+              pattern="[0-9]{16}"
+              maxLength={16}
+              inputMode="numeric"
+              showErrorHint={showFieldErrors}
             />
             <InputField
               label="No. Telepon"
               placeholder="Pastikan No telepon aktif"
               value={ownerForm.telp}
               onChange={(value) => setOwnerForm((prev) => ({ ...prev, telp: value }))}
+              pattern="[0-9]+"
+              inputMode="numeric"
+              showErrorHint={showFieldErrors}
             />
             <InputField
               label="Email"
@@ -111,6 +132,7 @@ export default function AjukanPage() {
               type="email"
               value={ownerForm.email}
               onChange={(value) => setOwnerForm((prev) => ({ ...prev, email: value }))}
+              showErrorHint={showFieldErrors}
             />
             <InputField
               label="Alamat Lengkap"
@@ -118,12 +140,14 @@ export default function AjukanPage() {
               value={ownerForm.alamat}
               onChange={(value) => setOwnerForm((prev) => ({ ...prev, alamat: value }))}
               multiline
+              showErrorHint={showFieldErrors}
             />
             <InputField
               label="Nama Merek"
               placeholder="Tulis nama merek usaha Anda"
               value={ownerForm.brand}
               onChange={(value) => setOwnerForm((prev) => ({ ...prev, brand: value }))}
+              showErrorHint={showFieldErrors}
             />
             <SelectField
               label="Bidang Usaha"
@@ -131,22 +155,26 @@ export default function AjukanPage() {
               options={businessFields}
               value={ownerForm.bidang}
               onChange={(value) => setOwnerForm((prev) => ({ ...prev, bidang: value }))}
+              showErrorHint={showFieldErrors}
             />
             <InputField
-              label="NIB (Opsional)"
-              placeholder="Tulis bila ada (opsional)"
+              label="NIB"
+              placeholder="Tulis NIB Anda"
               value={ownerForm.nib}
               onChange={(value) => setOwnerForm((prev) => ({ ...prev, nib: value }))}
+              required
+              showErrorHint={showFieldErrors}
             />
             <div className="apply-field">
               <span>Jadwal Operasional</span>
               <button
                 type="button"
                 className={`apply-select-button ${ownerForm.jadwal ? "filled" : ""}`}
-                onClick={() => setShowScheduleModal(true)}
+                onClick={() => { setScheduleError(false); setShowScheduleModal(true) }}
               >
                 {ownerForm.jadwal || "Pilih jadwal buka toko Anda"}
               </button>
+              {scheduleError && <p className="apply-input-hint">Harap isi kolom ini</p>}
             </div>
             <label className="apply-checkbox">
               <input
@@ -198,17 +226,63 @@ type InputFieldProps = {
   onChange: (value: string) => void
   type?: string
   multiline?: boolean
+  required?: boolean
+  pattern?: string
+  maxLength?: number
+  inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"]
+  showErrorHint?: boolean
 }
 
-function InputField({ label, placeholder, value, onChange, type = "text", multiline }: InputFieldProps) {
+function InputField({
+  label,
+  placeholder,
+  value,
+  onChange,
+  type = "text",
+  multiline,
+  required = true,
+  pattern,
+  maxLength,
+  inputMode,
+  showErrorHint = false,
+}: InputFieldProps) {
+  const setValidity = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    event.currentTarget.setCustomValidity("")
+  }
+
+  const noteInvalid = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    event.preventDefault()
+    event.currentTarget.setCustomValidity("Harap isi kolom ini")
+  }
+  const shouldShowRequiredHint = showErrorHint && required && !value.trim()
+
   return (
     <label className={`apply-field ${multiline ? "textarea" : ""}`}>
       <span>{label}</span>
       {multiline ? (
-        <textarea value={value} onChange={(event) => onChange(event.target.value)} placeholder={placeholder} />
+        <textarea
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+          placeholder={placeholder}
+          required={required}
+          onInvalid={noteInvalid}
+          onInput={setValidity}
+        />
       ) : (
-        <input type={type} value={value} onChange={(event) => onChange(event.target.value)} placeholder={placeholder} />
+        <input
+          type={type}
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+          placeholder={placeholder}
+          required={required}
+          pattern={pattern}
+          maxLength={maxLength}
+          inputMode={inputMode}
+          onInvalid={noteInvalid}
+          onInput={setValidity}
+        />
       )}
+      {shouldShowRequiredHint ? <p className="apply-input-hint">Harap isi kolom ini</p> : null}
     </label>
   )
 }
@@ -219,15 +293,42 @@ type SelectFieldProps = {
   options: string[]
   value: string
   onChange: (value: string) => void
+  required?: boolean
+  showErrorHint?: boolean
 }
 
-function SelectField({ label, placeholder, options, value, onChange }: SelectFieldProps) {
+function SelectField({
+  label,
+  placeholder,
+  options,
+  value,
+  onChange,
+  required = true,
+  showErrorHint = false,
+}: SelectFieldProps) {
+  const noteInvalid = (event: React.FormEvent<HTMLSelectElement>) => {
+    event.preventDefault()
+    event.currentTarget.setCustomValidity("Harap isi kolom ini")
+  }
+  const setValidity = (event: React.FormEvent<HTMLSelectElement>) => {
+    event.currentTarget.setCustomValidity("")
+  }
+  const showRequiredHint = showErrorHint && required && !value
+
   return (
     <label className="apply-field">
       <span>{label}</span>
       <div className="apply-select">
-        <select value={value} onChange={(event) => onChange(event.target.value)}>
-          <option value="">{placeholder}</option>
+        <select
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+          required={required}
+          onInvalid={noteInvalid}
+          onInput={setValidity}
+        >
+          <option value="" disabled hidden>
+            {placeholder}
+          </option>
           {options.map((option) => (
             <option key={option} value={option}>
               {option}
@@ -235,6 +336,7 @@ function SelectField({ label, placeholder, options, value, onChange }: SelectFie
           ))}
         </select>
       </div>
+      {showRequiredHint ? <p className="apply-input-hint">Harap isi kolom ini</p> : null}
     </label>
   )
 }
@@ -275,11 +377,10 @@ function ScheduleModal({
         <button className="apply-modal-close" onClick={onClose} aria-label="Tutup">
           &times;
         </button>
-        <header className="apply-page-header">
-          <img src="/logo-light.webp" alt="nemuinaja" width={84} height={84} />
-          <span>nemuinaja</span>
-          <h2 className="pengajuan">
-            Atur Jadwal Operasional Kamu
+        <header className="apply-modal-header">
+          <img src="/logo-light.webp" alt="nemuinaja" width={64} height={64} />
+          <h2>
+            Atur <span>Jadwal Operasional</span>
           </h2>
         </header>
         <div className="apply-schedule-list">
@@ -324,12 +425,11 @@ function TermsModal({ terms, onClose }: { terms: string[]; onClose: () => void }
         <button className="apply-modal-close" onClick={onClose} aria-label="Tutup">
           &times;
         </button>
-        <header className="apply-page-header">
-          <img src="/logo-light.webp" alt="nemuinaja" width={84} height={84} />
-          <span>nemuinaja</span>
-          <h1 className="pengajuan">
-            Yuk Tambahin Produk-mu
-          </h1>
+        <header className="apply-modal-header">
+          <img src="/logo-light.webp" alt="nemuinaja" width={64} height={64} />
+          <h2>
+            Syarat & <span>Ketentuan</span>
+          </h2>
         </header>
         <ol>
           {terms.map((term, index) => (
@@ -340,6 +440,11 @@ function TermsModal({ terms, onClose }: { terms: string[]; onClose: () => void }
     </div>
   )
 }
+
+
+
+
+
 
 
 
