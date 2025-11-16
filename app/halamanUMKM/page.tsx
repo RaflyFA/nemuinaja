@@ -106,7 +106,7 @@ export default function HalamanUMKMPage() {
           <h4>{umkm?.sellerName ?? "Payung Geulis Karya Utama"}</h4>
           <p>Kerajinan · {umkm?.sellerCity ?? "KOTA TASIKMALAYA"}</p>
         </div>
-        <Link href="/profil"><button className={styles.visitBtn}>Kunjungi</button></Link>
+        <Link href={`/halamanUMKM/${umkm?.id ?? id}`}><button className={styles.visitBtn}>Kunjungi</button></Link>
       </div>
 
       <div className={styles.statsRow}>
@@ -119,7 +119,7 @@ export default function HalamanUMKMPage() {
 
       <h3 style={{ fontSize: 15, fontWeight: 600, marginBottom: 12 }}>Produk lain dari toko ini</h3>
       {otherProduct ? (
-        <Link href={`/halamanUMKM?id=${otherProduct.id}`} className={styles.otherProduct}>
+        <Link href={`/halamanUMKM/${otherProduct.id}`} className={styles.otherProduct}>
           <div className={styles.otherThumb}>
             <img src={otherProduct.image ?? "/Foto Produk/Payung Geulis Mandiri/Cinderamata.webp"} alt="thumb" />
           </div>

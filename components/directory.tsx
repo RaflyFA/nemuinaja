@@ -144,7 +144,7 @@ export default function Directory() {
 
           <div className="directory-grid">
             {trendingItems.map((item) => (
-              <Link key={item.id} href={`/halamanUMKM?id=${item.id}`}>
+              <Link key={item.id} href={`/halamanUMKM/${item.id}`}>
                 <article className="directory-card">
                   <div className="directory-card-media" />
                   <div className="directory-card-body">
@@ -168,7 +168,7 @@ export default function Directory() {
           </div>
           <div className="directory-special-track" ref={specialTrackRef}>
             {specialItems.map((item) => (
-              <Link key={item.id} href={`/halamanUMKM?id=${item.id}`}>
+              <Link key={item.id} href={`/halamanUMKM/${item.id}`}>
                 <article className="directory-feature-card">
                   <div className="directory-feature-media" />
                   <div className="directory-feature-body">
@@ -199,7 +199,7 @@ export default function Directory() {
 
           <section className="directory-section directory-stack">
             {specialItems.map((item) => (
-              <Link key={`stack-${item.id}`} href={`/halamanUMKM?id=${item.id}`}>
+              <Link key={`stack-${item.id}`} href={`/halamanUMKM/${item.id}`}>
                 <article className="directory-stack-card">
                   <div className="directory-stack-media" />
                   <div className="directory-stack-body">

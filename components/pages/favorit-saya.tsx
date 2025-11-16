@@ -88,7 +88,7 @@ export default function FavoritSayaPage() {
 
         <section className="favorites-grid">
           {favoriteItems.map((item) => (
-            <Link key={item.id} href={`/halamanUMKM?id=${item.id}`}>
+            <Link key={item.id} href={`/halamanUMKM/${item.id}`}>
               <article className="favorite-card">
                 <div className="favorite-card-media">
                   <button
