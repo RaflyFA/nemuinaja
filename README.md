@@ -1,30 +1,30 @@
-# React app nemuinaja
+# nemuinaja — Direktori UMKM Lokal
 
-*Automatically synced with your [v0.app](https://v0.app) deployments*
+Sebuah web app yang menghubungkan warga dengan UMKM Tasikmalaya melalui peta digital interaktif, fitur koleksi, dan formulir pengajuan mitra sehingga cerita setiap usaha dapat dijangkau siapa pun.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/fauzanahmad0509-9886s-projects/v0-react-app-nemuinaja)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/lL3YSZtkYda)
+## Tech Stack
+- Next.js (App Router) + React
+- TypeScript
+- CSS Modules & custom global styles
+- Context API untuk autentikasi
+- Node.js environment
 
-## Overview
+## Cara Menjalankan
+1. git clone https://github.com/<user>/nemuinaja.git
+2. cd nemuinaja
+3. npm install
+4. npm run dev
+5. Buka http://localhost:3000
 
-This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
+## Progress Saat Ini
+- Landing page responsif lengkap dengan hero, carousel UMKM unggulan, kategori, CTA, dan FAQ
+- Halaman katalog (`/direktori`) dengan kartu UMKM, pencarian, dan filter
+- Fitur koleksi & favorit pengguna
+- Halaman profil + edit profil dengan state autentikasi mock
+- Alur pengajuan mitra UMKM (form pemilik, penjadwalan, Terms & Conditions)
+- Komponen drawer menu/search, footer terintegrasi, serta halaman informasi (“Tentang Kami”, FAQ, dsb.)
 
-## Deployment
-
-Your project is live at:
-
-**[https://vercel.com/fauzanahmad0509-9886s-projects/v0-react-app-nemuinaja](https://vercel.com/fauzanahmad0509-9886s-projects/v0-react-app-nemuinaja)**
-
-## Build your app
-
-Continue building your app on:
-
-**[https://v0.app/chat/lL3YSZtkYda](https://v0.app/chat/lL3YSZtkYda)**
-
-## How It Works
-
-1. Create and modify your project using [v0.app](https://v0.app)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+## Akun Untuk Juri
+- username biasa: user@gmail.com
+- username UMKM: payunggeulismandiri@gmail.com
+- pw: nemuin123
