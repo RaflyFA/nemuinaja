@@ -7,39 +7,37 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 export default function Carousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const touchStartRef = useRef<number | null>(null);
+
   const slides = [
     {
       id: 1,
-      img: "./public/6667f8f82be01f5fc9c94c11_contoh umkm di desa.webp",
-      text: "Soto Sederhana",
+      img: "/Foto Produk/baru1/produk1.webp",
+      text: "Biru Bulan",
     },
     {
       id: 2,
-      img: "https://placehold.co/800x450/303030/white?text=Gambar+UMKM+2",
-      text: "Bakso Istimewa",
+      img: "/Foto Produk/baru1/produk2.webp",
+      text: "Logo",
     },
     {
       id: 3,
-      img: "https://placehold.co/800x450/5AC4B5/white?text=Gambar+UMKM+3",
-      text: "Kopi Kenangan",
+      img: "/Foto Produk/baru1/produk3.webp",
+      text: "Biru Bulan",
     },
     {
       id: 4,
-      img: "https://placehold.co/800x450/303030/white?text=Gambar+UMKM+4",
-      text: "Martabak Asin",
+      img: "/Foto Produk/baru1/produk4.webp",
+      text: "Motif Bunga 1",
     },
     {
       id: 5,
-      img: "https://placehold.co/800x450/5AC4B5/white?text=Gambar+UMKM+5",
-      text: "Nasi Goreng Gila",
+      img: "/Foto Produk/baru1/produk5.webp",
+      text: "Motif Bunga 2",
     },
   ];
-  // ---------------------------------------------
-
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
   };
-
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };

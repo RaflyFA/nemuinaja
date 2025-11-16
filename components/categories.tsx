@@ -2,14 +2,16 @@
 
 import React, { useState, useRef, useEffect } from "react"
 
-type Item = { id: number; title: string; image: string }
+type Item = { id: number; title: string; image: string; rating: number }
 
 export default function Categories() {
   const items: Item[] = [
-    { id: 1, title: "Palm Trees", image: "https://picsum.photos/seed/1/420/320" },
-    { id: 2, title: "Bridge", image: "https://picsum.photos/seed/2/420/320" },
-    { id: 3, title: "Waterfall", image: "https://picsum.photos/seed/4/420/320" }
+    { id: 1, title: "Es Bojong", image: "/Foto Produk/Es Bojong/es bojong.webp", rating: 5.0 },
+    { id: 2, title: "Kupat Tahu Mangunreja", image: "/Foto Produk/Kupat Tahu Mangunreja/kupattahumangunreja.webp", rating: 5.0 },
+    { id: 3, title: "Payung Geulis Karya Utama", image: "/Foto Produk/Payung Geulis Karya Utama/Si Merah.webp", rating: 5.0 }
   ]
+
+  // active index points to the center visible item
   const [active, setActive] = useState<number>(0)
   const containerRef = useRef<HTMLDivElement | null>(null)
   const CARD = 220 
@@ -74,7 +76,7 @@ export default function Categories() {
     return res
   }
   return (
-    <section style={{ textAlign: 'center', padding: '32px 0' }}>
+    <section style={{ textAlign: 'center', padding: '32px 0', }}>
       <h2 style={{ margin: 0, fontSize: 22, fontWeight: 700 }}>
         Jelajahi UMKM
         <br />
@@ -131,12 +133,41 @@ export default function Categories() {
                       display: 'flex',
                       flexDirection: 'column',
                       alignItems: 'stretch',
-                      justifyContent: 'flex-end'
+                      justifyContent: 'flex-start'
                     }}
                   >
-                    <div style={{ flex: '1 1 auto', backgroundImage: `url(${it.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
-                    <div style={{ padding: '8px 10px', background: '#111', color: '#fff', fontSize: 13, textAlign: 'center' }}>
-                      <div style={{ fontWeight: 700 }}>{it.title}</div>
+                    <div style={{ flex: '1 1 auto', position: 'relative', overflow: 'hidden' }}>
+                      <img 
+                        src={it.image} 
+                        alt={it.title}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          objectPosition: 'center'
+                        }}
+                      />
+                      {/* Rating Badge */}
+                      <div style={{
+                        position: 'absolute',
+                        bottom: -14,
+                        right: 12,
+                        background: '#25a891',
+                        color: '#fff',
+                        padding: '4px 10px',
+                        borderRadius: '16px',
+                        fontSize: '12px',
+                        fontWeight: 700,
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                        boxShadow: '0 2px 6px rgba(0,0,0,0.15)'
+                      }}>
+                        ★ {it.rating.toFixed(1)}
+                      </div>
+                    </div>
+                    <div style={{ padding: '14px 10px 8px', background: '#fff', color: '#000', fontSize: 13, textAlign: 'center' }}>
+                      <div style={{ fontWeight: 700, marginTop: '6px' }}>{it.title}</div>
                     </div>
                   </div>
                 )
@@ -152,7 +183,7 @@ export default function Categories() {
         <button
           aria-label="prev"
           onClick={prev}
-          style={{ width: 34, height: 34, borderRadius: 9999, background: '#222', color: '#fff', border: 'none' }}
+          style={{ width: 28, height: 28, borderRadius: 9999, background: '#333', color: '#fff', border: 'none', cursor: 'pointer', fontSize: 16 }}
         >
           ‹
         </button>
@@ -187,7 +218,7 @@ export default function Categories() {
         <button
           aria-label="next"
           onClick={next}
-          style={{ width: 34, height: 34, borderRadius: 9999, background: '#222', color: '#fff', border: 'none' }}
+          style={{ width: 28, height: 28, borderRadius: 9999, background: '#333', color: '#fff', border: 'none', cursor: 'pointer', fontSize: 16 }}
         >
           ›
         </button>
