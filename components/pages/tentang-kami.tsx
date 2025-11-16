@@ -43,7 +43,24 @@ const visionMission = [
       "Mengajak masyarakat untuk bangga dan lebih sering berbelanja di warung tetangga dan usaha teman sendiri.",
     ],
   },
-]
+];
+
+export function VisionMissionSection() {
+  return (
+    <div>
+      {visionMission.map((item) => (
+        <section key={item.label}>
+          <h2 className="visi-misi">{item.label}</h2>
+
+          {item.descriptions.map((desc, i) => (
+            <p key={i}>{desc}</p>
+          ))}
+        </section>
+      ))}
+    </div>
+  );
+}
+
 
 export default function TentangKamiPage() {
   const router = useRouter()
@@ -100,7 +117,7 @@ export default function TentangKamiPage() {
         <section className="about-pill-grid">
           {visionMission.map((item) => (
             <article className="about-pill" key={item.label}>
-              <div className="about-pill-label" aria-hidden="true">
+              <div className="about-pill-label visi-misi" aria-hidden="true">
                 {item.label}
               </div>
               <div className="about-pill-content">
@@ -153,8 +170,8 @@ export default function TentangKamiPage() {
         <section className="about-cta">
           <p>Siap menemukan tempat favorit barumu? atau punya usaha yang ingin dikenal?</p>
           <div className="cta-buttons">
-            <button className="cta-outline">Mulai jelajah</button>
-            <button className="cta-solid">Daftarkan usaha</button>
+            <button className="cta-outline" onClick={() => router.push("/direktori")}>Mulai jelajah</button>
+            <button className="cta-solid" onClick={() => router.push("/ajukan")}>Daftarkan usaha</button>
           </div>
         </section>
       </PageLayout>

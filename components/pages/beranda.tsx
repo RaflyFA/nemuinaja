@@ -18,7 +18,6 @@ export default function BerandaPage() {
         <CtaDark />
         <Faq />
       </PageLayout>
-
       <Footer />
     </>
   )

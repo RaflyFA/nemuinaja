@@ -7,13 +7,22 @@ export default function Footer() {
         <div className="follow-block">
           <p className="footer-title">Follow <strong>nemuinaja</strong></p>
           <div className="social-icons">
-            <a href="#" aria-label="Instagram">
+            <a href="https://www.instagram.com/nemuinaja_?igsh=MTZ5NGFuYzI4eWx0eQ=="
+              aria-label="Instagram"
+              target="_blank"
+              rel="noopener noreferrer">
               <img src="/instagram.webp" alt="Instagram" style={{ width: 20, height: 20 }} />
             </a>
-            <a href="#" aria-label="Facebook">
+            <a href="https://www.facebook.com/share/17jLggsf7M/"
+              aria-label="Facebook"
+              target="_blank"
+              rel="noopener noreferrer">
               <img src="/facebook.webp" alt="Facebook" style={{ width: 20, height: 20 }} />
             </a>
-            <a href="#" aria-label="Twitter">
+            <a href="https://x.com/nemuinaja_?t=SwlmdW8tOHfWyaAlWMp7HA&s=09"
+              aria-label="Twitter"
+              target="_blank"
+              rel="noopener noreferrer">
               <img src="/x.webp" alt="X" style={{ width: 20, height: 20 }} />
             </a>
           </div>
