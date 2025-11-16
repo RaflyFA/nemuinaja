@@ -1,0 +1,119 @@
+.container {
+  max-width: 390px;
+  margin: 0 auto;
+  padding: 92px 16px 0; /* remove bottom padding so footer sits flush to page bottom */
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  color: #111217;
+}
+.topRow {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:12px;
+}
+.backBtn {
+  width:40px;
+  height:40px;
+  border-radius:999px;
+  background:#111;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+}
+.detailTitle { font-size:15px; font-weight:700 }
+.hero {
+  width: 100%;
+  height: 360px;
+  background: #e9e9ec;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.06);
+}
+.heartBtn {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 48px;
+  height: 48px;
+  border-radius: 18px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+.ratingBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  margin-top: 12px;
+  margin-left: 6px;
+  background: #25a891;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 12px;
+}
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 8px 0 6px;
+}
+.hours {
+  color: #5f5f65;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+.desc {
+  color: #444;
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+.sellerCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: white;
+  padding: 14px;
+  border-radius: 18px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  margin: 18px 0;
+}
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex: 0 0 56px;
+}
+.avatar img { width:100%; height:100%; object-fit:cover; border-radius:50% }
+.sellerInfo h4 { margin: 0; font-size: 15px; font-weight: 700 }
+.sellerInfo p { margin: 4px 0 0; color: #6e6e74; font-size: 12px }
+.visitBtn {
+  margin-left: auto;
+  padding: 6px 12px;
+  border-radius: 12px;
+  border: 1px solid #bfe6df;
+  background: transparent;
+  color: #1d1d21;
+  font-weight: 600;
+}
+.statsRow { display:flex; gap:12px; justify-content:space-between; margin-top:12px; color:#6e6e74; font-size:13px }
+.divider { height:1px; background:#e7e7ea; margin:14px 0 }
+.otherProduct { display:flex; gap:12px; align-items:center }
+.otherThumb { width:92px; height:92px; border-radius:12px; background:#e9e9ec; overflow:hidden }
+.otherThumb img { width:100%; height:100%; object-fit:cover }
+.otherInfo h5 { margin: 0; font-size:13px; font-weight:700 }
+.contact { display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; margin:18px 0 }
+.waIcon { width:56px; height:56px; opacity:0.95 }
+.stars { display:flex; gap:18px; justify-content:center; margin:18px 0 }
+.starBtn { width:44px; height:44px; display:inline-flex; align-items:center; justify-content:center; border-radius:6px; cursor:pointer; background:transparent; border:none }
+.starActive { color:#1d7f71 }
+.mapBox { height:240px; border-radius:20px; overflow:hidden; background:#e9e9ec; box-shadow: 0 8px 18px rgba(0,0,0,0.06); margin-top:18px }
+/* footerSpacer removed to avoid gap between page and footer */
+.footerSpacer { display:none }

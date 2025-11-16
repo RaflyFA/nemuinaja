@@ -2,6 +2,7 @@
 
 import type React from "react";
 import { useState, useRef } from "react";
+import Link from "next/link"
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function Carousel() {
@@ -85,18 +86,18 @@ export default function Carousel() {
           >
             {/* Render semua slide/gambar */}
             {slides.map((slide) => (
-              <div
-                key={slide.id}
-                // Setiap slide: lebar 100% dan tidak akan 'shrink'
-                className="relative h-full w-full flex-shrink-0"
-              >
-                <img
-                  src={slide.img}
-                  alt={slide.text}
-                  className="w-full h-full object-cover" // Menggunakan Tailwind untuk 'fill' dan 'objectFit'
-                  loading="lazy"
-                />
-              </div>
+                <Link
+                  key={slide.id}
+                  href={`/halamanUMKM?id=${slide.id}`}
+                  className="relative h-full w-full flex-shrink-0"
+                >
+                  <img
+                    src={slide.img}
+                    alt={slide.text}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </Link>
             ))}
           </div>
         </div>
@@ -109,7 +110,7 @@ export default function Carousel() {
           onClick={prevSlide}
           aria-label="Previous slide"
         >
-          <ChevronLeft size={24} />
+          <ChevronLeft size={24} color="white" />
         </button>
 
         {/* Tombol Kanan */}
@@ -120,7 +121,7 @@ export default function Carousel() {
           onClick={nextSlide}
           aria-label="Next slide"
         >
-          <ChevronRight size={24} />
+          <ChevronRight size={24} color="white" />
         </button>
       </div>
 

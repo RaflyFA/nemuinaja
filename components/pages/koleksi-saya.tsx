@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import PageLayout from "./page-layout"
+import Link from "next/link"
 import Footer from "../footer"
 import { useAuth } from "../../lib/auth-context"
 
@@ -90,26 +91,28 @@ export default function KoleksiSayaPage() {
           {collectionItems.map((item) => {
             const bookmarked = bookmarkedIds.includes(item.id)
             return (
-              <article key={item.id} className="collection-card">
-                <div className="collection-avatar" aria-hidden="true">
-                  <span role="img" aria-hidden="true">
-                    <img src="/profile-collestion.webp" alt="Profile UMKM" width={100} height={100} aria-hidden="true" />
-                  </span>
-                </div>
-                <div className="collection-card-body">
-                  <h3>{item.name}</h3>
-                  <p>{item.category}</p>
-                  <p className="collection-city">{item.city}</p>
-                </div>
-                <button
-                  className={`collection-bookmark ${bookmarked ? "saved" : ""}`}
-                  aria-pressed={bookmarked}
-                  aria-label={bookmarked ? "Hapus dari koleksi" : "Simpan ke koleksi"}
-                  onClick={() => toggleBookmark(item.id)}
-                >
-                  <img src="/bookmark.webp" alt="" width={18} height={18} aria-hidden="true" />
-                </button>
-              </article>
+              <Link key={item.id} href={`/halamanUMKM?id=${item.id}`}>
+                <article className="collection-card">
+                  <div className="collection-avatar" aria-hidden="true">
+                    <span role="img" aria-hidden="true">
+                      <img src="/profile-collestion.webp" alt="Profile UMKM" width={100} height={100} aria-hidden="true" />
+                    </span>
+                  </div>
+                  <div className="collection-card-body">
+                    <h3>{item.name}</h3>
+                    <p>{item.category}</p>
+                    <p className="collection-city">{item.city}</p>
+                  </div>
+                  <button
+                    className={`collection-bookmark ${bookmarked ? "saved" : ""}`}
+                    aria-pressed={bookmarked}
+                    aria-label={bookmarked ? "Hapus dari koleksi" : "Simpan ke koleksi"}
+                    onClick={(e) => { e.preventDefault(); toggleBookmark(item.id) }}
+                  >
+                    <img src="/bookmark.webp" alt="" width={18} height={18} aria-hidden="true" />
+                  </button>
+                </article>
+              </Link>
             )
           })}
         </section>

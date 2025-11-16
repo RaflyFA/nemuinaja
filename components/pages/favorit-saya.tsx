@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import PageLayout from "./page-layout"
+import Link from "next/link"
 import Footer from "../footer"
 import { useAuth } from "../../lib/auth-context"
 
@@ -87,24 +88,26 @@ export default function FavoritSayaPage() {
 
         <section className="favorites-grid">
           {favoriteItems.map((item) => (
-            <article key={item.id} className="favorite-card">
-              <div className="favorite-card-media">
-                <button
-                  className={`favorite-heart ${likedIds.includes(item.id) ? "liked" : ""}`}
-                  aria-pressed={likedIds.includes(item.id)}
-                  onClick={() => toggleLike(item.id)}
-                >
-                  <img src="/like.webp" alt={likedIds.includes(item.id) ? "Unlike" : "Like"} width={20} height={20} />
-                </button>
-                <span className="favorite-rating">
-                  <span aria-hidden="true">★</span> {item.rating.toFixed(1)}
-                </span>
-              </div>
-              <div className="favorite-card-body">
-                <h3>{item.name}</h3>
-                <p>{item.hours}</p>
-              </div>
-            </article>
+            <Link key={item.id} href={`/halamanUMKM?id=${item.id}`}>
+              <article className="favorite-card">
+                <div className="favorite-card-media">
+                  <button
+                    className={`favorite-heart ${likedIds.includes(item.id) ? "liked" : ""}`}
+                    aria-pressed={likedIds.includes(item.id)}
+                    onClick={(e) => { e.preventDefault(); toggleLike(item.id) }}
+                  >
+                    <img src="/like.webp" alt={likedIds.includes(item.id) ? "Unlike" : "Like"} width={20} height={20} />
+                  </button>
+                  <span className="favorite-rating">
+                    <span aria-hidden="true">★</span> {item.rating.toFixed(1)}
+                  </span>
+                </div>
+                <div className="favorite-card-body">
+                  <h3>{item.name}</h3>
+                  <p>{item.hours}</p>
+                </div>
+              </article>
+            </Link>
           ))}
         </section>
       </PageLayout>

@@ -5,6 +5,7 @@ import AppBar from "./app-bar"
 import DrawerMenu from "./drawer-menu"
 import DrawerSearch from "./drawer-search"
 import Footer from "./footer"
+import Link from "next/link"
 
 type DirectoryCardData = {
   id: number
@@ -147,16 +148,18 @@ export default function Directory() {
 
           <div className="directory-grid">
             {trendingItems.map((item) => (
-              <article key={item.id} className="directory-card">
-                <div className="directory-card-media" />
-                <div className="directory-card-body">
-                  <span className="directory-rating">
-                    <span aria-hidden="true">★</span> {item.rating.toFixed(1)}
-                  </span>
-                  <h3>{item.name}</h3>
-                  <p>{item.hours}</p>
-                </div>
-              </article>
+              <Link key={item.id} href={`/halamanUMKM?id=${item.id}`}>
+                <article className="directory-card">
+                  <div className="directory-card-media" />
+                  <div className="directory-card-body">
+                    <span className="directory-rating">
+                      <span aria-hidden="true">★</span> {item.rating.toFixed(1)}
+                    </span>
+                    <h3>{item.name}</h3>
+                    <p>{item.hours}</p>
+                  </div>
+                </article>
+              </Link>
             ))}
           </div>
         </section>
@@ -169,16 +172,18 @@ export default function Directory() {
           </div>
           <div className="directory-special-track" ref={specialTrackRef}>
             {specialItems.map((item) => (
-              <article key={item.id} className="directory-feature-card">
-                <div className="directory-feature-media" />
-                <div className="directory-feature-body">
-                  <span className="directory-rating">
-                    <span aria-hidden="true">★</span> {item.rating.toFixed(1)}
-                  </span>
-                  <h3>{item.name}</h3>
-                  <p>{item.hours}</p>
-                </div>
-              </article>
+              <Link key={item.id} href={`/halamanUMKM?id=${item.id}`}>
+                <article className="directory-feature-card">
+                  <div className="directory-feature-media" />
+                  <div className="directory-feature-body">
+                    <span className="directory-rating">
+                      <span aria-hidden="true">★</span> {item.rating.toFixed(1)}
+                    </span>
+                    <h3>{item.name}</h3>
+                    <p>{item.hours}</p>
+                  </div>
+                </article>
+              </Link>
             ))}
           </div>
 
@@ -198,16 +203,18 @@ export default function Directory() {
 
           <section className="directory-section directory-stack">
             {specialItems.map((item) => (
-              <article key={`stack-${item.id}`} className="directory-stack-card">
-                <div className="directory-stack-media" />
-                <div className="directory-stack-body">
-                  <span className="directory-rating">
-                    <span aria-hidden="true">★</span> {item.rating.toFixed(1)}
-                  </span>
-                  <h3>{item.name}</h3>
-                  <p>{item.hours}</p>
-                </div>
-              </article>
+              <Link key={`stack-${item.id}`} href={`/halamanUMKM?id=${item.id}`}>
+                <article className="directory-stack-card">
+                  <div className="directory-stack-media" />
+                  <div className="directory-stack-body">
+                    <span className="directory-rating">
+                      <span aria-hidden="true">★</span> {item.rating.toFixed(1)}
+                    </span>
+                    <h3>{item.name}</h3>
+                    <p>{item.hours}</p>
+                  </div>
+                </article>
+              </Link>
             ))}
           </section>
         </main>
